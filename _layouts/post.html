@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | Muhammad Tahir Yaqoob</title>
+  <meta name="description" content="{{ page.summary | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body class="article-page">
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="{{ '/index.html' | relative_url }}">
+        <span class="brand-title">Muhammad Tahir Yaqoob</span>
+        <span class="brand-sub">Computer Engineering Portfolio</span>
+      </a>
+      <nav class="nav-links">
+        <a href="{{ '/index.html' | relative_url }}">Home</a>
+        <a href="{{ '/about.html' | relative_url }}">About</a>
+        <a class="active" href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
+        <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container article-shell">
+        <div class="article-header">
+          <div class="article-number">{{ page.article_label | default: "Journey Post" }}</div>
+          <h1>{{ page.title }}</h1>
+          <div class="article-meta">Muhammad Tahir Yaqoob | {{ page.meta | default: "Computer Engineering Journey" }}</div>
+        </div>
+        {{ content }}
+        <div class="article-nav">
+          {% if page.previous %}
+          <a class="button secondary" href="{{ page.previous.url | relative_url }}">Previous</a>
+          {% else %}
+          <span></span>
+          {% endif %}
+          <a class="button secondary" href="{{ '/blog.html' | relative_url }}">Back to Blog</a>
+          {% if page.next %}
+          <a class="button primary" href="{{ page.next.url | relative_url }}">Next Article</a>
+          {% else %}
+          <span></span>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-wrap">Journey post rendered through the portfolio's HTML article layout</div>
+  </footer>
+</body>
+</html>

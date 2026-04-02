@@ -1,0 +1,10 @@
+title: Muhammad Tahir Yaqoob
+description: Computer Engineering portfolio and journey archive
+markdown: kramdown
+excerpt_separator: <!--more-->
+permalink: /posts/:title.html
+author:
+  name: Muhammad Tahir Yaqoob
+  program: BS Computer Engineering
+  university: UET Lahore Faisalabad Campus
+  hometown: Bhalwal, District Sargodha, Pakistan

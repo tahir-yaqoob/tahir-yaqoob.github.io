@@ -1,3 +1,7 @@
+---
+---
+{% assign legacy_post_count = site.data.legacy_posts | size %}
+{% assign total_journey_posts = site.posts.size | plus: legacy_post_count %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,20 +9,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muhammad Tahir Yaqoob | Computer Engineering Journey</title>
   <meta name="description" content="A polished portfolio website presenting Muhammad Tahir Yaqoob's computer engineering journey, achievements, and academic story.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="index.html">
+      <a class="brand" href="{{ '/index.html' | relative_url }}">
         <span class="brand-title">Muhammad Tahir Yaqoob</span>
         <span class="brand-sub">Computer Engineering Portfolio</span>
       </a>
       <nav class="nav-links">
-        <a class="active" href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Journey Blog</a>
-        <a href="contact.html">Contact</a>
+        <a class="active" href="{{ '/index.html' | relative_url }}">Home</a>
+        <a href="{{ '/about.html' | relative_url }}">About</a>
+        <a href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
+        <a href="{{ '/contact.html' | relative_url }}">Contact</a>
       </nav>
     </div>
   </header>
@@ -28,11 +32,11 @@
       <div class="container hero-grid">
         <div class="hero-main">
           <span class="eyebrow">Future Computer Engineer</span>
-          <h1>Building a <span class="accent-text">career in computer engineering</span> through persistence, curiosity, and practical learning.</h1>
-          <p class="lead">I am Muhammad Tahir Yaqoob, a Computer Engineering student at UET Lahore Faisalabad Campus. This portfolio presents my academic path, my early challenges, and the turning points that shaped my confidence in programming, systems, and engineering problem-solving.</p>
+          <h1>Building a <span class="accent-text">career in computer engineering</span> through curiosity, persistence, and practical problem-solving.</h1>
+          <p class="lead">From Bhalwal, District Sargodha, Pakistan, I am pursuing BS Computer Engineering at UET Lahore Faisalabad Campus. What began as curiosity about how computers work has developed into focused academic learning in programming, systems, and practical engineering problem-solving.</p>
           <div class="hero-actions">
-            <a class="button primary" href="about.html">Explore My Story</a>
-            <a class="button secondary" href="blog.html">Read My Posts</a>
+            <a class="button primary" href="{{ '/about.html' | relative_url }}">Explore My Story</a>
+            <a class="button secondary" href="{{ '/blog.html' | relative_url }}">Read My Posts</a>
           </div>
         </div>
 
@@ -42,16 +46,16 @@
             <div class="mini-list">
               <div><strong>Field:</strong> BS Computer Engineering</div>
               <div><strong>University:</strong> UET Lahore Faisalabad Campus</div>
-              <div><strong>Focus:</strong> Programming, databases, hardware curiosity, problem-solving</div>
-              <div><strong>Portfolio Theme:</strong> Professional contrast design with a modern engineering feel</div>
+              <div><strong>Hometown:</strong> Bhalwal, District Sargodha, Pakistan</div>
+              <div><strong>Focus:</strong> Programming, hardware-software systems, and problem-solving</div>
             </div>
           </div>
           <div class="profile-tile">
             <h2>What This Site Shows</h2>
             <div class="mini-list">
-              <div>My transition from uncertainty to academic confidence</div>
-              <div>Key learning moments from ECAT to university life</div>
-              <div>A full journey blog with readable post pages</div>
+              <div>Fixed personal information on the homepage</div>
+              <div>My journey from early uncertainty to academic confidence</div>
+              <div>A growing blog archive accessed through Read My Posts</div>
             </div>
           </div>
         </aside>
@@ -60,7 +64,7 @@
       <div class="container">
         <div class="stats-bar">
           <div class="stat">
-            <div class="stat-value">14</div>
+            <div class="stat-value">{{ total_journey_posts }}</div>
             <div class="stat-label">Journey Posts</div>
           </div>
           <div class="stat">
@@ -82,23 +86,23 @@
     <section class="page-section">
       <div class="container">
         <h2 class="section-title">Fixed Information About Me</h2>
-        <p class="section-intro">This home page is intentionally focused on fixed personal information, in line with the teacher's instructions. It introduces who I am, what I study, and what defines my journey without showing blog posts directly on the first page.</p>
+        <p class="section-intro">This homepage is intentionally focused on fixed personal information, in line with the teacher's requirement. It introduces my background, academic direction, and personal growth without displaying blog posts directly on the first page.</p>
         <div class="highlight-grid">
           <div class="highlight-box">
             <h3>Identity</h3>
-            <p>I am a determined engineering student who entered university with curiosity about how computers work and gradually transformed that curiosity into academic performance and practical growth.</p>
+            <p>I am Muhammad Tahir Yaqoob from Bhalwal, District Sargodha, Pakistan. My journey into computer engineering began with curiosity about how computers work and has continued to grow through academic learning and practical problem-solving.</p>
           </div>
           <div class="highlight-box">
-            <h3>Academic Direction</h3>
-            <p>My path centers on computer engineering because it combines software, hardware, electronics, and systems thinking in one powerful field.</p>
+            <h3>Learning Journey</h3>
+            <p>I built confidence in programming and engineering concepts through persistence. What started with uncertainty gradually became stronger understanding through disciplined study, practice, and continuous improvement.</p>
           </div>
           <div class="highlight-box">
-            <h3>Core Strength</h3>
-            <p>I value consistency, learning under pressure, and solving problems even when situations do not go according to plan.</p>
+            <h3>Engineering Interest</h3>
+            <p>Computer engineering attracts me because it connects both hardware and software. I enjoy understanding internal components, system behavior, and the programming logic that turns ideas into useful solutions.</p>
           </div>
         </div>
         <div class="quote-strip">
-          <blockquote>“The semester that began with uncertainty ended with confidence and achievement.”</blockquote>
+          <blockquote>"The semester that began with uncertainty ended with confidence and achievement."</blockquote>
           <cite>Personal Journey Statement</cite>
         </div>
       </div>
