@@ -1,0 +1,794 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muhammad Tahir Yaqoob â€” The Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#06060B;--bg2:#0D0D15;--bg3:#14141F;--bg4:#1A1A28;
+  --accent:#A855F7;--accent2:#C084FC;--accent3:#7C3AED;
+  --gold:#F59E0B;--gold2:#FBBF24;--gold3:#FDE68A;
+  --rose:#F43F5E;--rose2:#FB7185;
+  --cyan:#06B6D4;--cyan2:#22D3EE;
+  --text:#F1F5F9;--mu:#94A3B8;--mu2:#64748B;--mu3:#475569;
+  --bo:rgba(168,85,847,.15);--bo2:rgba(168,85,847,.25);
+  --r:14px;--r2:20px;
+  --font-head:'Playfair Display',serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.78;overflow-x:hidden}
+body::before{content:';position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 600px 400px at 15% 20%,rgba(168,85,847,.07) 0%,transparent 70%),
+  radial-gradient(ellipse 500px 500px at 85% 60%,rgba(245,158,11,.04) 0%,transparent 70%),
+  radial-gradient(ellipse 400px 300px at 50% 90%,rgba(244,63,94,.03) 0%,transparent 70%)}
+body::after{content:';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#cg{position:fixed;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(168,85,847,.12) 0%,rgba(245,158,11,.05) 40%,transparent 70%);
+  pointer-events:none;z-index:998;transform:translate(-50%,-50%);filter:blur(15px);transition:left .12s,top .12s}
+#fireworks-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+#hero-particles{position:absolute;inset:0;z-index:2;pointer-events:none}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--gold));border-radius:6px}
+/* â•â•â• NAV â•â•â• */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 5%;background:rgba(6,6,11,.85);backdrop-filter:blur(30px) saturate(1.5);border-bottom:1px solid var(--bo)}
+nav::after{content:';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--gold),var(--rose),transparent);opacity:.35}
+.nlogo{font-family:var(--font-head);font-size:1.15rem;color:var(--text);text-decoration:none;cursor:pointer;font-weight:700}
+.nlogo span{background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nright{display:flex;align-items:center;gap:2.2rem}
+.nlinks{display:flex;gap:1.8rem;list-style:none}
+.nlinks a{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu2);text-decoration:none;transition:all .3s;cursor:pointer;position:relative;font-weight:600}
+.nlinks a:hover{color:var(--accent2)}
+.nlinks a.active{color:var(--accent2)}
+.nlinks a::after{content:';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;transition:width .3s}
+.nlinks a:hover::after,.nlinks a.active::after{width:100%}
+.nbadge{font-size:10px;padding:5px 14px;border-radius:30px;background:linear-gradient(135deg,rgba(168,85,847,.12),rgba(245,158,11,.08));color:var(--gold2);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(245,158,11,.18);font-weight:600}
+.page{display:none;min-height:100vh;animation:fadeIn .5s ease}
+.page.active{display:block}
+.home-panel{padding-top:1.5rem}
+.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.home-card{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:1.6rem 1.7rem;position:relative;overflow:hidden;transition:all .35s}
+.home-card::before{content:';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--rose));opacity:0;transition:opacity .35s}
+.home-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 10px 30px rgba(168,85,847,.08)}
+.home-card:hover::before{opacity:.75}
+.home-card .idl{margin-bottom:10px}
+.home-card p{font-size:13px;color:var(--mu);line-height:1.75;font-weight:300}
+/* â•â•â• HERO â€” CENTERED, CINEMATIC â•â•â• */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 5% 5rem;position:relative;z-index:2;border-bottom:1px solid var(--bo);overflow:hidden}
+#hero::before{content:';position:absolute;inset:0;
+  background:radial-gradient(ellipse 900px 700px at 50% 40%,rgba(168,85,847,.07) 0%,transparent 60%),
+  radial-gradient(ellipse 600px 500px at 30% 70%,rgba(245,158,11,.04) 0%,transparent 60%),
+  radial-gradient(ellipse 500px 400px at 70% 20%,rgba(244,63,94,.03) 0%,transparent 60%);z-index:0}
+.hbgt{position:absolute;font-family:var(--font-head);font-size:clamp(12rem,28vw,28rem);
+  background:linear-gradient(180deg,rgba(168,85,847,.035) 0%,rgba(245,158,11,.015) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  left:50%;top:50%;transform:translate(-50%,-50%);user-select:none;pointer-events:none;line-height:1;white-space:nowrap;letter-spacing:-.06em;font-weight:900;z-index:0}
+.hero-content{position:relative;z-index:5;max-width:900px}
+/* GREETING PILL */
+.hero-greeting{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 20px;border-radius:50px;margin-bottom:2rem;
+  background:linear-gradient(135deg,rgba(168,85,847,.08),rgba(245,158,11,.06));
+  border:1px solid rgba(168,85,847,.18);
+  opacity:0;animation:up .8s .1s forwards;
+}
+.hero-greeting .wave{font-size:1.3rem;animation:waveHand 2.5s ease-in-out infinite;display:inline-block;transform-origin:70% 70%}
+@keyframes waveHand{0%,60%,100%{transform:rotate(0deg)}10%,30%{transform:rotate(14deg)}20%{transform:rotate(-8deg)}40%{transform:rotate(14deg)}50%{transform:rotate(-4deg)}}
+.hero-greeting span:last-child{font-size:12.5px;color:var(--mu);font-weight:500}
+.hero-greeting span:last-child em{color:var(--accent2);font-style:normal;font-weight:600}
+.htag{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:up .9s .25s forwards;font-weight:600;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* NAME BLOCK */
+.hname-wrap{position:relative;display:inline-block;margin-bottom:.5rem}
+.hname{font-family:var(--font-head);font-size:clamp(3.2rem,9vw,7.5rem);line-height:1.05;color:var(--text);opacity:0;animation:up 1s .4s forwards;font-weight:900}
+.hname .first{font-family:var(--font-body);font-size:.28em;letter-spacing:.35em;text-transform:uppercase;color:var(--mu2);display:block;margin-bottom:.5rem;font-weight:600}
+.hname .last{font-style:italic;
+  background:linear-gradient(135deg,var(--accent2),var(--gold2),var(--rose2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:nameGradient 6s ease infinite}
+@keyframes nameGradient{0%,100%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(25deg)}}
+/* â•â•â• CROWN BULB â•â•â• */
+.crown-bulb-wrap{
+  position:absolute;top:-60px;right:-18px;z-index:10;pointer-events:none;
+  width:74px;height:82px;transform:rotate(20deg);
+  filter:drop-shadow(0 0 22px rgba(245,158,11,.35)) drop-shadow(0 0 45px rgba(168,85,847,.15));
+}
+.crown-bulb{position:relative;width:46px;height:56px;margin:0 auto}
+.bulb-glass{
+  width:46px;height:46px;
+  background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.08) 0%,transparent 50%),
+  radial-gradient(circle at 50% 50%,rgba(168,85,847,.03) 0%,transparent 80%);
+  border:1.5px solid rgba(245,158,11,.28);border-radius:50% 50% 45% 45%;position:relative;
+  box-shadow:0 0 22px 5px rgba(245,158,11,.1),0 0 45px 10px rgba(168,85,847,.05),inset 0 0 18px rgba(245,158,11,.03);
+  animation:glassBreath 3s ease-in-out infinite;
+}
+.bulb-glass::after{content:';position:absolute;top:5px;left:9px;width:9px;height:11px;
+  background:radial-gradient(ellipse,rgba(255,255,255,.12) 0%,transparent 70%);border-radius:50%;transform:rotate(-15deg)}
+@keyframes glassBreath{
+  0%,100%{box-shadow:0 0 22px 5px rgba(245,158,11,.1),0 0 45px 10px rgba(168,85,847,.05),inset 0 0 18px rgba(245,158,11,.03)}
+  50%{box-shadow:0 0 32px 12px rgba(245,158,11,.2),0 0 65px 18px rgba(168,85,847,.08),inset 0 0 25px rgba(245,158,11,.06)}
+}
+.tungsten{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:22px;height:24px}
+.tungsten svg{width:100%;height:100%}
+.tungsten-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:18px;height:18px;
+  background:radial-gradient(circle,rgba(255,180,40,.6) 0%,rgba(245,158,11,.2) 40%,transparent 70%);
+  border-radius:50%;animation:filBuzz .08s linear infinite alternate,filPulse 2s ease-in-out infinite}
+@keyframes filBuzz{0%{opacity:.75;transform:translate(-50%,-55%) scale(1)}100%{opacity:1;transform:translate(calc(-50% + .5px),calc(-55% + .3px)) scale(1.02)}}
+@keyframes filPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5)}}
+.bulb-base{width:20px;height:12px;margin:-1px auto 0;
+  background:linear-gradient(180deg,#6B5B3A 0%,#A08050 30%,#6B5B3A 50%,#A08050 70%,#6B5B3A 100%);
+  border-radius:0 0 5px 5px;position:relative;border:1px solid rgba(168,85,847,.15);border-top:none}
+.bulb-base::before,.bulb-base::after{content:';position:absolute;left:-1px;right:-1px;height:2px;
+  background:linear-gradient(180deg,rgba(245,158,11,.4),rgba(139,115,64,.6));border-radius:1px}
+.bulb-base::before{top:2px}.bulb-base::after{top:6px}
+.bulb-rays{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px}
+.bulb-ray{position:absolute;top:50%;left:50%;width:1.5px;height:18px;
+  background:linear-gradient(180deg,rgba(255,200,60,.4) 0%,transparent 100%);
+  transform-origin:center 0;border-radius:2px;animation:rayP 2.5s ease-in-out infinite}
+.bulb-ray:nth-child(1){transform:translate(-50%,-100%) rotate(0deg)}
+.bulb-ray:nth-child(2){transform:translate(-50%,-100%) rotate(45deg)}
+.bulb-ray:nth-child(3){transform:translate(-50%,-100%) rotate(90deg)}
+.bulb-ray:nth-child(4){transform:translate(-50%,-100%) rotate(135deg)}
+.bulb-ray:nth-child(5){transform:translate(-50%,-100%) rotate(180deg)}
+.bulb-ray:nth-child(6){transform:translate(-50%,-100%) rotate(225deg)}
+.bulb-ray:nth-child(7){transform:translate(-50%,-100%) rotate(270deg)}
+.bulb-ray:nth-child(8){transform:translate(-50%,-100%) rotate(315deg)}
+@keyframes rayP{0%,100%{opacity:.2;height:18px}50%{opacity:.5;height:25px}}
+/* HERO SUBTITLE & TAGLINE */
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);color:var(--mu);margin-top:1.8rem;font-weight:300;line-height:1.85;max-width:580px;margin-left:auto;margin-right:auto;opacity:0;animation:up 1s .7s forwards}
+.hero-sub strong{color:var(--text);font-weight:600}
+.hero-tagline{font-family:var(--font-mono);font-size:12.5px;color:var(--mu2);margin-top:1.2rem;letter-spacing:.05em;opacity:0;animation:up .9s .85s forwards}
+.hero-tagline span{padding:3px 10px;border-radius:4px;margin:0 3px}
+.hero-tagline .tg-p{background:rgba(168,85,847,.1);color:var(--accent2);border:1px solid rgba(168,85,847,.15)}
+.hero-tagline .tg-g{background:rgba(245,158,11,.08);color:var(--gold2);border:1px solid rgba(245,158,11,.12)}
+.hero-tagline .tg-r{background:rgba(244,63,94,.08);color:var(--rose2);border:1px solid rgba(244,63,94,.12)}
+.hcta{display:flex;gap:1.2rem;margin-top:3rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:up 1s 1s forwards}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:.85rem 2.2rem;border-radius:50px;font-family:var(--font-body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;font-weight:600;transition:all .35s;border:1px solid transparent;position:relative;overflow:hidden}
+.btng{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;box-shadow:0 6px 25px rgba(168,85,847,.3)}
+.btng:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(168,85,847,.45)}
+.btno{background:transparent;color:var(--accent2);border:1px solid var(--bo2)}
+.btno:hover{border-color:var(--accent);background:rgba(168,85,847,.06);transform:translateY(-4px)}
+.btn-gold{background:transparent;color:var(--gold2);border:1px solid rgba(245,158,11,.22)}
+.btn-gold:hover{border-color:var(--gold);background:rgba(245,158,11,.06);transform:translateY(-4px)}
+/* â•â•â• STATS RIBBON â•â•â• */
+.stats-ribbon{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  max-width:860px;margin:-3rem auto 0;position:relative;z-index:5;
+  background:rgba(13,13,21,.9);backdrop-filter:blur(20px);
+  border:1px solid var(--bo);border-radius:var(--r2);overflow:hidden;
+  opacity:0;animation:up 1s 1.2s forwards;
+  box-shadow:0 15px 50px rgba(0,0,0,.5),0 0 30px rgba(168,85,847,.06);
+}
+.stat-cell{padding:1.6rem 1.5rem;text-align:center;border-right:1px solid var(--bo);transition:background .3s}
+.stat-cell:last-child{border-right:none}
+.stat-cell:hover{background:rgba(168,85,847,.04)}
+.stat-num{font-family:var(--font-head);font-size:1.8rem;font-weight:900;line-height:1;margin-bottom:4px;
+  background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-lbl{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu2);font-weight:600}
+/* â•â•â• SECTION COMMON â•â•â• */
+section{padding:7rem 5%;position:relative;z-index:2;border-bottom:1px solid var(--bo)}
+section::before{content:';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--gold),var(--rose),transparent);opacity:.15}
+.stag{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:1.2rem;font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stag::before{content:';width:24px;height:1.5px;background:linear-gradient(90deg,var(--accent),var(--gold));flex-shrink:0}
+.sh{font-family:var(--font-head);font-size:clamp(2.1rem,4.5vw,3.4rem);line-height:1.12;color:var(--text);margin-bottom:3.5rem;font-weight:900}
+.sh em{font-style:italic;background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:5.5rem;align-items:start}
+.stxt{font-size:14.5px;color:var(--mu);line-height:1.9;font-weight:300}
+.stxt p{margin-bottom:1.4rem}
+.stxt strong{color:var(--text);font-weight:600}
+.tl{margin-top:2rem;border-left:2px solid var(--bo);padding-left:2rem}
+.tli{margin-bottom:2.4rem;position:relative}
+.tli::before{content:';position:absolute;left:-2.55rem;top:.35rem;width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--gold));box-shadow:0 0 12px rgba(168,85,847,.4)}
+.tlp{font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tlt{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.tld{font-size:13px;color:var(--mu2);line-height:1.7}
+.cgpan{margin-top:2.5rem;background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:1.8rem;text-align:center;position:relative;overflow:hidden}
+.cgpan::before{content:';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(168,85,847,.05) 0%,transparent 70%)}
+.cgpab{font-family:var(--font-head);font-size:3.2rem;line-height:1;font-weight:900;position:relative;
+  background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cgpas{font-size:12px;color:var(--mu2);margin-top:.5rem;letter-spacing:.08em;position:relative}
+.qstrip{padding:5.5rem 5%;border-bottom:1px solid var(--bo);position:relative;z-index:2;
+  background:radial-gradient(ellipse 800px 400px at 50% 50%,rgba(168,85,847,.03) 0%,transparent 70%)}
+.qinner{max-width:840px;margin:0 auto;text-align:center}
+.qinner blockquote{font-family:var(--font-head);font-size:clamp(1.25rem,2.8vw,2rem);line-height:1.58;color:var(--mu);font-style:italic}
+.qinner blockquote em{background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.qattr{font-size:10.5px;color:var(--mu2);letter-spacing:.14em;text-transform:uppercase;margin-top:1.6rem;font-weight:500}
+.skwrap{display:grid;grid-template-columns:repeat(2,1fr);gap:1.3rem}
+.skc{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:1.5rem 1.7rem;transition:all .35s;position:relative;overflow:hidden}
+.skc::before{content:';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--rose));opacity:0;transition:opacity .35s}
+.skc:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 10px 30px rgba(168,85,847,.08)}
+.skc:hover::before{opacity:.7}
+.skcl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.1rem;font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sktags{display:flex;flex-wrap:wrap;gap:8px}
+.skt{font-size:12px;padding:5px 14px;border-radius:6px;border:1px solid var(--bo);color:var(--mu);background:var(--bg3);transition:all .25s;font-weight:500}
+.skt:hover{border-color:var(--accent);color:var(--accent2);background:rgba(168,85,847,.05)}
+.pjcard{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r2);overflow:hidden;position:relative}
+.pjcard::before{content:';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),var(--gold),var(--rose),transparent)}
+.pjtop{padding:2.8rem;border-bottom:1px solid var(--bo)}
+.pjtype{font-size:10px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--bo);display:inline-block;padding:5px 14px;border-radius:6px;margin-bottom:1.3rem;font-weight:600;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pjtitle{font-family:var(--font-head);font-size:clamp(1.3rem,2.5vw,1.8rem);color:var(--text);line-height:1.3;margin-bottom:1.1rem;font-weight:700}
+.pjori{font-size:13.5px;color:var(--mu);line-height:1.85;font-style:italic;border-left:2.5px solid rgba(168,85,847,.3);padding-left:1.2rem;margin-bottom:1.3rem}
+.pjori strong{background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal}
+.pjdesc{font-size:14.5px;color:var(--mu);line-height:1.85;font-weight:300}
+.pjmeta{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--bo)}
+.pjmc{padding:1.4rem 1.7rem;border-right:1px solid var(--bo)}.pjmc:last-child{border-right:none}
+.pjml{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu2);margin-bottom:6px;font-weight:600}
+.pjmv{font-size:13.5px;color:var(--text);font-weight:600}
+.pjft{padding:1.4rem 2.8rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--bo);flex-wrap:wrap;gap:1.2rem}
+.pjco{font-size:13px;color:var(--mu2)}.pjco span{color:var(--text);font-weight:600}
+.pjlk{font-size:12.5px;color:var(--accent2);text-decoration:none;letter-spacing:.09em;display:flex;align-items:center;gap:7px;transition:gap .3s;font-weight:500}
+.pjlk:hover{gap:13px;color:var(--gold2)}
+.aigrid{display:flex;flex-direction:column;gap:0}
+.airow{display:grid;grid-template-columns:60px 1fr 40px;align-items:center;gap:1.5rem;padding:1.6rem 1.8rem;border:1px solid var(--bo);border-bottom:none;background:var(--bg2);cursor:pointer;transition:all .35s}
+.airow:first-child{border-radius:var(--r) var(--r) 0 0}
+.airow:last-child{border-bottom:1px solid var(--bo);border-radius:0 0 var(--r) var(--r)}
+.airow:hover{background:var(--bg3);border-color:var(--accent);transform:translateX(8px);box-shadow:0 6px 25px rgba(168,85,847,.06)}
+.airn{font-family:var(--font-head);font-size:1.6rem;background:linear-gradient(135deg,rgba(168,85,847,.2),rgba(245,158,11,.12));-webkit-background-clip:text;-webkit-text-fill-color:transparent;user-select:none;font-weight:700}
+.airowt{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4}
+.aichips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.aichips .chip{font-size:9.5px;padding:3px 11px;border-radius:5px;border:1px solid var(--bo);color:var(--accent2);background:rgba(168,85,847,.04);letter-spacing:.08em;font-weight:600}
+.aiarr{font-size:18px;color:var(--mu2);transition:all .3s}
+.airow:hover .aiarr{color:var(--accent2);transform:translateX(5px)}
+#art-reader{position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;display:none}
+.ar-nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 5%;background:rgba(6,6,11,.95);backdrop-filter:blur(25px);border-bottom:1px solid var(--bo)}
+.ar-back{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;transition:color .25s;font-family:var(--font-body);font-weight:600}
+.ar-back:hover{color:var(--gold2)}
+.ar-logo{font-family:var(--font-head);font-size:1.05rem;color:var(--mu)}
+.ar-wrap{max-width:740px;margin:0 auto;padding:6rem 5% 9rem}
+.arnum{font-family:var(--font-head);font-size:5.2rem;line-height:1;margin-bottom:1.1rem;user-select:none;font-weight:900;
+  background:linear-gradient(135deg,rgba(168,85,847,.06),rgba(245,158,11,.03));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.artchips{display:flex;gap:7px;margin-bottom:1.5rem;flex-wrap:wrap}
+.artchips .chip{font-size:10px;padding:3px 11px;border-radius:5px;border:1px solid var(--bo);color:var(--accent2);background:rgba(168,85,847,.04);letter-spacing:.08em;font-weight:600}
+.arh1{font-family:var(--font-head);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;color:var(--text);margin-bottom:1.5rem;font-weight:900}
+.arby{font-size:12px;color:var(--mu2);letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;font-weight:500}
+.arby span{color:var(--mu)}
+.arhdr{margin-bottom:4rem;padding-bottom:3.5rem;border-bottom:1px solid var(--bo)}
+.arbody{font-size:16px;color:var(--mu);line-height:1.95;font-weight:300}
+.arbody p{margin-bottom:1.7rem}
+.arbody strong{color:var(--text);font-weight:600}
+.arbody em{color:var(--accent2);font-style:italic}
+.arbody h3{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;margin:2.6rem 0 .9rem;display:flex;align-items:center;gap:9px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.arbody h3::before{content:';width:16px;height:1.5px;background:linear-gradient(90deg,var(--accent),var(--gold));flex-shrink:0}
+.pq{border-left:3px solid var(--accent);padding:1.4rem 1.8rem;margin:2.6rem 0;
+  background:linear-gradient(135deg,rgba(168,85,847,.04),rgba(245,158,11,.02));border-radius:0 var(--r) var(--r) 0}
+.pq p{font-family:var(--font-head);font-style:italic;font-size:1.15rem;color:var(--text);line-height:1.65;margin:0}
+.arnav{display:flex;justify-content:space-between;align-items:stretch;gap:1rem;margin-top:5rem;padding-top:3rem;border-top:1px solid var(--bo);flex-wrap:wrap}
+.anb{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:1.2rem 1.6rem;cursor:pointer;transition:all .3s;text-align:left;max-width:280px;font-family:var(--font-body)}
+.anb:hover{border-color:var(--accent);transform:translateY(-3px)}
+.anb.right{text-align:right}
+.anb .dir{font-size:10px;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:5px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.anb .ttl{font-size:13px;color:var(--text);line-height:1.4;display:block}
+.anback{background:none;border:1px solid var(--bo);border-radius:var(--r);padding:.8rem 1.6rem;color:var(--mu);font-size:11px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .3s;font-family:var(--font-body);align-self:center;font-weight:500}
+.anback:hover{border-color:var(--accent);color:var(--accent2)}
+.idgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.idc{background:var(--bg2);border:1px solid var(--bo);border-radius:var(--r);padding:1.5rem 1.7rem;transition:all .35s;position:relative;overflow:hidden}
+.idc::before{content:';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold));opacity:0;transition:opacity .35s}
+.idc:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 10px 30px rgba(168,85,847,.06)}
+.idc:hover::before{opacity:.7}
+.idl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:9px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.idv{font-size:14px;color:var(--text);font-weight:600;line-height:1.4}
+.ids{font-size:12px;color:var(--mu2);margin-top:5px;line-height:1.6}
+.csub{color:var(--mu);text-align:center;max-width:560px;margin:0 auto 2.5rem;font-size:14px;font-weight:300}
+.clinks{display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap}
+.clk{display:flex;align-items:center;gap:10px;padding:.85rem 2rem;border-radius:var(--r);border:1px solid var(--bo);color:var(--mu);text-decoration:none;font-size:13px;transition:all .35s;font-weight:500}
+.clk:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-4px)}
+.clk svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+footer{padding:3rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.2rem;font-size:12px;color:var(--mu2);border-top:1px solid var(--bo);position:relative;z-index:2}
+footer em{font-style:normal;background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}
+@keyframes up{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.rv{opacity:0;transform:translateY(35px);transition:opacity .9s cubic-bezier(0.23,1,0.32,1),transform .9s cubic-bezier(0.23,1,0.32,1)}
+.rv.in{opacity:1;transform:none}
+#project-modal{position:fixed;inset:0;background:rgba(6,6,11,.92);backdrop-filter:blur(12px);z-index:400;display:none;align-items:center;justify-content:center;overflow-y:auto}
+.modal-content{max-width:920px;width:95%;background:var(--bg2);border-radius:var(--r2);padding:3rem;position:relative;color:var(--text);margin:2rem auto;max-height:90vh;overflow-y:auto;border:1px solid var(--bo)}
+.modal-content::before{content:';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--rose));border-radius:var(--r2) var(--r2) 0 0}
+.close-btn{position:absolute;top:20px;right:25px;font-size:36px;cursor:pointer;background:none;border:none;z-index:5;
+  background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+@media(max-width:920px){.two{grid-template-columns:1fr;gap:4rem}.pjmeta{grid-template-columns:repeat(2,1fr)}.pjmc:nth-child(2){border-right:none}.idgrid,.home-grid{grid-template-columns:1fr 1fr}.stats-ribbon{grid-template-columns:repeat(2,1fr)}.stat-cell:nth-child(2){border-right:none}.stat-cell:nth-child(1),.stat-cell:nth-child(2){border-bottom:1px solid var(--bo)}.crown-bulb-wrap{top:-50px;right:-10px}}
+@media(max-width:620px){nav{padding:1rem 5%}.nlinks,.nbadge{display:none}section{padding:5rem 5%}.skwrap{grid-template-columns:1fr}.pjmeta{grid-template-columns:1fr}.pjmc{border-right:none;border-bottom:1px solid var(--bo)}.pjmc:last-child{border-bottom:none}.pjft{flex-direction:column;align-items:flex-start}.arnav{flex-direction:column}.anb{max-width:100%;width:100%}.anb.right{text-align:left}.idgrid,.home-grid{grid-template-columns:1fr}.stats-ribbon{grid-template-columns:1fr}.stat-cell{border-right:none;border-bottom:1px solid var(--bo)}.stat-cell:last-child{border-bottom:none}.crown-bulb-wrap{top:-42px;right:-5px}.hero-tagline span{display:inline-block;margin-bottom:4px}}
+</style>
+</head>
+<body>
+<div id="cg"></div>
+<canvas id="fireworks-canvas"></canvas>
+<canvas id="hero-particles"></canvas>
+<nav>
+  <span class="nlogo" onclick="goPortfolio()">Tahir <span>Yaqoob</span></span>
+  <div class="nright">
+    <ul class="nlinks">
+      <li><a data-page-link="index" onclick="showPage('index')">Index</a></li>
+      <li><a data-page-link="about" onclick="showPage('about')">About</a></li>
+      <li><a data-page-link="blog" onclick="showPage('blog')">Blog</a></li>
+      <li><a data-page-link="contact" onclick="showPage('contact')">Contact Us</a></li>
+    </ul>
+    <span class="nbadge">âœ¦ CGPA 3.94</span>
+  </div>
+</nav>
+<div id="portfolio">
+<main id="page-index" class="page active">
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-greeting">
+      <span class="wave">ðŸ‘‹</span>
+      <span>Assalamu Alaikum â€” welcome to <em>my journey</em></span>
+    </div>
+    <div class="htag">BS Computer Engineering Â· UET Faisalabad Â· 2nd Semester</div>
+    <div class="hname-wrap">
+      <h1 class="hname">
+        <span class="first">Muhammad</span>
+        Tahir <span class="last">Yaqoob</span>
+      </h1>
+      <div class="crown-bulb-wrap">
+        <div class="crown-bulb">
+          <div class="bulb-rays"><div class="bulb-ray"></div><div class="bulb-ray"></div><div class="bulb-ray"></div><div class="bulb-ray"></div><div class="bulb-ray"></div><div class="bulb-ray"></div><div class="bulb-ray"></div><div class="bulb-ray"></div></div>
+          <div class="bulb-glass">
+            <div class="tungsten-glow"></div>
+            <div class="tungsten">
+              <svg viewBox="0 0 24 26" fill="none"><line x1="8" y1="24" x2="8" y2="14" stroke="rgba(180,140,50,.5)" stroke-width=".7"/><line x1="16" y1="24" x2="16" y2="14" stroke="rgba(180,140,50,.5)" stroke-width=".7"/>
+              <path d="M8 14 Q9 12 10 14 Q11 16 12 14 Q13 12 14 14 Q15 16 16 14" stroke="rgba(255,200,60,.95)" stroke-width="1.3" fill="none" stroke-linecap="round"><animate attributeName="stroke-opacity" values=".7;1;.8;1;.7" dur=".15s" repeatCount="indefinite"/></path>
+              <path d="M9 11 Q10 9 11 11 Q12 13 13 11 Q14 9 15 11" stroke="rgba(255,190,50,.85)" stroke-width="1" fill="none" stroke-linecap="round"><animate attributeName="stroke-opacity" values=".6;1;.7;1;.6" dur=".12s" repeatCount="indefinite"/></path>
+              <path d="M10 8 Q11 6 12 8 Q13 10 14 8" stroke="rgba(255,180,40,.75)" stroke-width=".8" fill="none" stroke-linecap="round"><animate attributeName="stroke-opacity" values=".5;.9;.6;.9;.5" dur=".1s" repeatCount="indefinite"/></path></svg>
+            </div>
+          </div>
+          <div class="bulb-base"></div>
+        </div>
+      </div>
+    </div>
+    <p class="hero-sub">From <strong>Sargodha, Punjab</strong> â€” a night-owl builder turning late-night code sessions into real impact. Zero programming background to class topper in one semester.</p>
+    <div class="hero-tagline">
+      <span class="tg-p">Python</span>
+      <span class="tg-g">Machine Learning</span>
+      <span class="tg-r">3.94 GPA</span>
+      <span class="tg-p">Class Topper</span>
+    </div>
+    <div class="hcta">
+      <a class="btn btng" onclick="showPage('about')">âœ¦ Explore About</a>
+      <a class="btn btno" onclick="showPage('blog')">Read My Story</a>
+      <a class="btn btn-gold" href="mailto:tahiryaqoob865@gmail.com">Say Hello</a>
+    </div>
+  </div>
+  <div class="hbgt">TAHIR</div>
+</section>
+<div style="padding:0 5%;position:relative;z-index:5;border-bottom:1px solid var(--bo)">
+  <div class="stats-ribbon">
+    <div class="stat-cell"><div class="stat-num">3.94</div><div class="stat-lbl">Semester GPA</div></div>
+    <div class="stat-cell"><div class="stat-num">90+</div><div class="stat-lbl">PF Theory</div></div>
+    <div class="stat-cell"><div class="stat-num">1st</div><div class="stat-lbl">Class Position</div></div>
+    <div class="stat-cell"><div class="stat-num">14</div><div class="stat-lbl">Reflections</div></div>
+  </div>
+</div>
+<div class="qstrip rv">
+  <div class="qinner">
+    <blockquote>"The campus felt like a ghost town â€” overgrown grass, empty roads, and an admin who told us we were <em>two days too early</em>. That was my welcome to university."</blockquote>
+    <p class="qattr">â€” First day at UET Faisalabad Â· September 2025</p>
+  </div>
+</div>
+<section class="home-panel">
+  <p class="stag rv">01 - Fixed Information</p>
+  <h2 class="sh rv">A quick <em>introduction</em> on the main page.</h2>
+  <div class="home-grid rv">
+    <div class="home-card"><div class="idl">Current Role</div><div class="idv">BS Computer Engineering Student</div><p>Studying at UET Faisalabad and building a strong base in programming, databases, and machine learning.</p></div>
+    <div class="home-card"><div class="idl">Academic Snapshot</div><div class="idv">3.94 GPA · Class Topper</div><p>Started with no formal programming background and finished the first semester at the top of the class.</p></div>
+    <div class="home-card"><div class="idl">Direction</div><div class="idv">AI / ML Focus</div><p>Interested in real systems, practical data work, and a long-term path toward advanced study in AI and ML.</p></div>
+  </div>
+</section>
+</main>
+<main id="page-about" class="page">
+<section id="about">
+  <div class="two">
+    <div class="rv">
+      <p class="stag">01 - My Story</p>
+      <h2 class="sh">Not the path I was handed -<br/>the one I <em>chose.</em></h2>
+      <div class="stxt">
+        <p>My journey began with ECAT preparation alongside board exams. After scoring around 230/400 on my first attempt, overconfidence led to a drop to 217 on the second. My final aggregate of about 74% was not enough for UET Lahore's main campus, but it brought me to the <strong>Faisalabad campus</strong> and that turned out to be exactly where I needed to be.</p>
+        <p>I arrived in Faisalabad on 15 September 2025 with a bag, a dream, and Google Maps that failed me the moment the rickshaw driver asked for landmarks. The campus was deserted from flood closures, with overgrown grass, silent roads, and an abandoned feeling everywhere.</p>
+        <p>First semester was raw. I had <strong>zero computer background</strong>. Programming was alien. Yet every late night in the hostel, every wrong lab I walked into, and every quiz I prepared for with friends built something stronger. I ended with a <strong>3.94 GPA</strong> and topped the class.</p>
+      </div>
+    </div>
+    <div class="rv" style="transition-delay:.15s">
+      <p class="stag">Academic Timeline</p>
+      <div class="tl">
+        <div class="tli"><div class="tlp">2024 - ECAT Preparation</div><div class="tlt">FSc Pre-Engineering + ECAT</div><div class="tld">85%+ boards. Two ECAT attempts. Aggregate about 74%.</div></div>
+        <div class="tli"><div class="tlp">Semester 1 · Sept 2025 - Feb 2026</div><div class="tlt">BS CE - UET Faisalabad</div><div class="tld">PF, Calculus, Discrete Math, ICT. CGPA: 3.94. Class topper.</div></div>
+        <div class="tli"><div class="tlp">Semester 2 · 2026 - In Progress</div><div class="tlt">Continuing CE</div><div class="tld">Stronger, more focused. Thinking Masters in AI/ML.</div></div>
+        <div class="tli"><div class="tlp">Long-Term</div><div class="tlt">Masters in AI / ML</div><div class="tld">Build real systems. The Builder path.</div></div>
+      </div>
+      <div class="cgpan"><div class="cgpab">3.94</div><div class="cgpas">Cumulative GPA - UET Faisalabad</div></div>
+    </div>
+  </div>
+</section>
+<section id="skills">
+  <p class="stag rv">02 - Technical Skills</p>
+  <h2 class="sh rv">What I <em>build with.</em></h2>
+  <div class="skwrap">
+    <div class="skc rv"><div class="skcl">Languages</div><div class="sktags"><span class="skt">Python</span><span class="skt">C</span><span class="skt">SQL</span></div></div>
+    <div class="skc rv" style="transition-delay:.08s"><div class="skcl">Tools</div><div class="sktags"><span class="skt">VS Code</span><span class="skt">Visual Studio</span><span class="skt">Git</span></div></div>
+    <div class="skc rv" style="transition-delay:.16s"><div class="skcl">Domains</div><div class="sktags"><span class="skt">Machine Learning</span><span class="skt">Data Analysis</span><span class="skt">Databases</span></div></div>
+    <div class="skc rv" style="transition-delay:.24s"><div class="skcl">Academics</div><div class="sktags"><span class="skt">Calculus</span><span class="skt">Discrete Math</span><span class="skt">ICT</span><span class="skt">PF</span></div></div>
+  </div>
+</section>
+<section id="project">
+  <p class="stag rv">03 - Featured Project</p>
+  <h2 class="sh rv">Born from a <em>late-night idea.</em></h2>
+  <div class="pjcard rv">
+    <div class="pjtop">
+      <span class="pjtype">Machine Learning · Supervised Learning · Weather Forecasting</span>
+      <h3 class="pjtitle">Supervised Learning Approach for Next Day Temperature and Precipitation Forecasting in Basel</h3>
+      <p class="pjori">A late-night conversation with <strong>Syed Muhammad Zain</strong> sparked it. Co-built with my roommate.</p>
+      <p class="pjdesc">Supervised ML model on 10 years of data from 18 European cities. Full pipeline: preprocessing, feature engineering, training, evaluation. Presentation drama - laptop would not connect, and the code took 2-3 minutes live.</p>
+    </div>
+    <div class="pjmeta">
+      <div class="pjmc"><div class="pjml">Type</div><div class="pjmv">ML Forecasting</div></div>
+      <div class="pjmc"><div class="pjml">Dataset</div><div class="pjmv">18 cities · 10yr</div></div>
+      <div class="pjmc"><div class="pjml">Stack</div><div class="pjmv">Python · sklearn</div></div>
+      <div class="pjmc"><div class="pjml">Team</div><div class="pjmv">Zain & Tahir</div></div>
+    </div>
+    <div class="pjft">
+      <div class="pjco">Co-built with <span>Syed Muhammad Zain</span></div>
+      <a class="pjlk" href="https://www.kaggle.com/datasets/orvile/european-cities-weather-prediction-dataset" target="_blank">Kaggle Dataset -></a>
+      <button onclick="showReport()" class="btn btng" style="margin-left:20px">View Report</button>
+    </div>
+  </div>
+</section>
+<section id="identity">
+  <p class="stag rv">04 - Beyond Code</p>
+  <h2 class="sh rv">Who I <em>really am.</em></h2>
+  <div class="idgrid rv">
+    <div class="idc"><div class="idl">Home</div><div class="idv">Sargodha, Punjab</div><div class="ids">Shaped my grit.</div></div>
+    <div class="idc"><div class="idl">Family</div><div class="idv">High achievers</div><div class="ids">Brother: gold-medal doctor. Sister: university topper.</div></div>
+    <div class="idc"><div class="idl">Peak Hours</div><div class="idv">After midnight</div><div class="ids">When code finally clicks.</div></div>
+    <div class="idc"><div class="idl">Hardware Roots</div><div class="idv">First PC opened at 12</div><div class="ids">That is why CE, not CS.</div></div>
+    <div class="idc"><div class="idl">When Stuck</div><div class="idv">Try again</div><div class="ids">Problems break first, not me.</div></div>
+    <div class="idc"><div class="idl">Friends</div><div class="idv">Zain, Ali, Asim</div><div class="ids">The hostel study group behind 3.94.</div></div>
+  </div>
+</section>
+</main>
+<main id="page-blog" class="page">
+<section id="articles">
+  <p class="stag rv">05 - Reflections</p>
+  <h2 class="sh rv">First & Second Semester - <em>exactly as it happened.</em></h2>
+  <p class="rv" style="color:var(--mu);max-width:600px;font-size:14px;margin-bottom:2.8rem;font-weight:300;">Fourteen honest stories - from ECAT to online classes during Ramadan. Click any post below to read the complete article.</p>
+  <div class="aigrid" id="art-index-list"></div>
+</section>
+</main>
+<main id="page-contact" class="page">
+<section id="contact">
+  <p class="stag rv" style="justify-content:center">06 - Let's Connect</p>
+  <h2 class="sh rv" style="text-align:center;margin-bottom:1rem">Build something <em>together?</em></h2>
+  <p class="csub rv">Into AI/ML, want to collaborate, or talk late-night ideas - reach out.</p>
+  <div class="clinks rv">
+    <a class="clk" href="mailto:tahiryaqoob865@gmail.com"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>tahiryaqoob865@gmail.com</a>
+    <a class="clk" href="https://github.com/tahiryaqoob865-blip" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>GitHub</a>
+  </div>
+</section>
+</main>
+<footer>
+  <span>Â© 2026 <em>Muhammad Tahir Yaqoob</em> Â· BS CE Â· UET Faisalabad</span>
+  <span>Built after midnight âœ¦ from Sargodha âœ¦ with love for code</span>
+</footer>
+</div>
+<div id="art-reader">
+  <nav class="ar-nav"><button class="ar-back" onclick="goBlog()">Back</button><span class="ar-logo">Tahir Yaqoob â€” Reflections</span></nav>
+  <div class="ar-wrap" id="ar-content"></div>
+</div>
+<div id="project-modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="hideReport()">Ã—</button>
+    <h2 style="background:linear-gradient(135deg,var(--accent2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1.5rem;font-family:var(--font-head)">Weather Prediction â€” Full Report</h2>
+    <p><strong>Reg:</strong> 2025-BSCPE-116 Â· <strong>Group:</strong> G-33</p>
+    <h3 style="color:var(--accent2);margin:2rem 0 1rem">Objectives</h3>
+    <p style="color:var(--mu)">Analyse weather data, train Random Forest models for Basel predictions, evaluate, visualize.</p>
+    <h3 style="color:var(--accent2);margin:2rem 0 1rem">Results</h3>
+    <p style="color:var(--mu)">Temperature: MAE 1.31, RMSE 1.68, RÂ² 0.948 Â· Precipitation: MAE 0.29, RMSE 0.49, RÂ² 0.017</p>
+    <h3 style="color:var(--accent2);margin:2rem 0 1rem">Presentation</h3>
+    <p style="color:var(--mu)">Laptop refused projector. Transferred files. Code needed 2-3 min. Tense silence. Output appeared. 10/10.</p>
+    <pre style="background:var(--bg3);color:var(--mu);padding:1.5rem;border-radius:10px;font-size:13px;overflow:auto;white-space:pre-wrap;border:1px solid var(--bo);font-family:var(--font-mono)">import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
+# Full pipeline: 18 cities, 10 years</pre>
+    <p style="margin-top:2rem;text-align:center;color:var(--mu2)">Scored 10/10 âœ¦</p>
+  </div>
+</div>
+<script>
+/* CURSOR */
+const cg=document.getElementById('cg');
+document.addEventListener('mousemove',e=>{cg.style.left=e.clientX+'px';cg.style.top=e.clientY+'px'});
+/* HERO PARTICLES */
+const hC=document.getElementById('hero-particles'),hX=hC.getContext('2d');let hP=[];
+function rH(){const h=document.getElementById('hero');if(h){hC.width=innerWidth;hC.height=h.offsetHeight+100}}
+rH();
+class HP{
+  constructor(){this.x=Math.random()*hC.width;this.y=Math.random()*hC.height;this.s=Math.random()*2.2+.5;this.sx=Math.random()*.35-.175;this.sy=Math.random()*.35-.175;this.h=Math.random()>.5?270:35}
+  u(){this.x+=this.sx;this.y+=this.sy;if(this.x<0||this.x>hC.width)this.sx*=-1;if(this.y<0||this.y>hC.height)this.sy*=-1}
+  d(){const c=this.h===270?'168,85,847':'245,158,11';hX.fillStyle=`rgba(${c},.5)`;hX.beginPath();hX.arc(this.x,this.y,this.s,0,Math.PI*2);hX.fill()}
+}
+for(let i=0;i<60;i++)hP.push(new HP());
+function aH(){hX.clearRect(0,0,hC.width,hC.height);hP.forEach(p=>{p.u();p.d()});
+  for(let i=0;i<hP.length;i++)for(let j=i+1;j<hP.length;j++){const dx=hP[i].x-hP[j].x,dy=hP[i].y-hP[j].y,d=Math.hypot(dx,dy);
+    if(d<105){const c=hP[i].h===270?'168,85,847':'245,158,11';hX.strokeStyle=`rgba(${c},${.28*(105-d)/105})`;hX.lineWidth=.7;hX.beginPath();hX.moveTo(hP[i].x,hP[i].y);hX.lineTo(hP[j].x,hP[j].y);hX.stroke()}}
+  requestAnimationFrame(aH)}
+aH();
+/* FIREWORKS â€” CONTROLLED BURSTS */
+const fC=document.getElementById('fireworks-canvas'),fX=fC.getContext('2d');
+function rF(){fC.width=innerWidth;fC.height=Math.max(document.documentElement.scrollHeight,innerHeight*3)}
+rF();
+const pals=[['rgba(168,85,847,','rgba(192,132,252,','rgba(124,58,237,'],['rgba(245,158,11,','rgba(251,191,36,','rgba(253,230,138,'],['rgba(244,63,94,','rgba(251,113,133,','rgba(225,29,72,'],['rgba(6,182,212,','rgba(34,211,238,','rgba(103,232,249,'],['rgba(255,255,255,','rgba(200,200,220,','rgba(168,85,847,'],['rgba(245,158,11,','rgba(244,63,94,','rgba(168,85,847,']];
+class Sp{
+  constructor(x,y,c,t){this.x=x;this.y=y;const a=Math.random()*Math.PI*2,sp=t==='r'?Math.random()*.5+2.5:Math.random()*3.5+.8;
+    this.vx=Math.cos(a)*sp;this.vy=Math.sin(a)*sp-1;this.l=1;this.dc=Math.random()*.018+.007;this.c=c;this.sz=Math.random()*2.5+.4;this.tr=[];this.g=t==='r'?.08:.035}
+  u(){this.tr.push({x:this.x,y:this.y,l:this.l});if(this.tr.length>10)this.tr.shift();this.x+=this.vx;this.y+=this.vy;this.vy+=this.g;this.vx*=.99;this.l-=this.dc}
+  d(){for(let i=0;i<this.tr.length;i++){const t=this.tr[i],a=(i/this.tr.length)*t.l*.3;fX.fillStyle=this.c+a+')';fX.beginPath();fX.arc(t.x,t.y,this.sz*.4,0,Math.PI*2);fX.fill()}
+    fX.fillStyle=this.c+this.l+')';fX.beginPath();fX.arc(this.x,this.y,this.sz,0,Math.PI*2);fX.fill();
+    fX.fillStyle=this.c+(this.l*.2)+')';fX.beginPath();fX.arc(this.x,this.y,this.sz*3.5,0,Math.PI*2);fX.fill()}
+}
+class Rk{
+  constructor(){this.x=Math.random()*fC.width;this.y=fC.height;this.ty=Math.random()*fC.height*.5+fC.height*.08;
+    this.vy=-(Math.random()*4.5+3.5);this.vx=(Math.random()-.5)*2.5;this.tr=[];this.ex=false;this.pal=pals[Math.floor(Math.random()*pals.length)];this.tp=Math.random()>.7?'r':'b'}
+  u(){if(!this.ex){this.tr.push({x:this.x,y:this.y});if(this.tr.length>14)this.tr.shift();this.x+=this.vx;this.y+=this.vy;this.vy+=.055;if(this.y<=this.ty||this.vy>=0){this.ex=true;return true}}return false}
+  d(){for(let i=0;i<this.tr.length;i++){const a=(i/this.tr.length)*.4;fX.fillStyle=`rgba(255,255,255,${a})`;fX.beginPath();fX.arc(this.tr[i].x,this.tr[i].y,1.2,0,Math.PI*2);fX.fill()}
+    fX.fillStyle='rgba(255,240,200,.8)';fX.beginPath();fX.arc(this.x,this.y,2,0,Math.PI*2);fX.fill();fX.fillStyle='rgba(168,85,847,.25)';fX.beginPath();fX.arc(this.x,this.y,5,0,Math.PI*2);fX.fill()}
+}
+let rks=[],sps=[],ft=0,nextBurst=180;
+function aF(){
+  rF();fX.clearRect(0,0,fC.width,fC.height);ft++;
+  if(ft>=nextBurst){
+    const count=2+Math.floor(Math.random()*2);
+    for(let i=0;i<count;i++)setTimeout(()=>rks.push(new Rk()),i*200);
+    nextBurst=ft+180+Math.floor(Math.random()*180);
+  }
+  for(let i=rks.length-1;i>=0;i--){const ex=rks[i].u();if(ex){const r=rks[i],n=r.tp==='r'?55:42;
+    for(let j=0;j<n;j++){const c=r.pal[Math.floor(Math.random()*r.pal.length)];sps.push(new Sp(r.x,r.y,c,r.tp))}
+    const b=pals[Math.floor(Math.random()*pals.length)];for(let j=0;j<10;j++)sps.push(new Sp(r.x,r.y,b[Math.floor(Math.random()*b.length)],'b'));
+    rks.splice(i,1)}else{rks[i].d()}}
+  for(let i=sps.length-1;i>=0;i--){sps[i].u();if(sps[i].l<=0)sps.splice(i,1);else sps[i].d()}
+  requestAnimationFrame(aF)}
+aF();
+addEventListener('resize',rH);
+/* SCROLL REVEAL */
+const rvEls=document.querySelectorAll('.rv');
+const io=new IntersectionObserver(ent=>{ent.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
+rvEls.forEach(el=>io.observe(el));
+/* NAV */
+const PAGES=['index','about','blog','contact'];
+function updateNav(page){
+  document.querySelectorAll('[data-page-link]').forEach(link=>link.classList.toggle('active',link.dataset.pageLink===page));
+}
+function showPage(page){
+  document.getElementById('portfolio').style.display='block';
+  document.getElementById('art-reader').style.display='none';
+  PAGES.forEach(name=>document.getElementById(`page-${name}`)?.classList.toggle('active',name===page));
+  updateNav(page);
+  window.scrollTo(0,0);
+}
+function goPortfolio(){showPage('index')}
+function goBlog(){showPage('blog')}
+function openArticle(i){document.getElementById('portfolio').style.display='none';document.getElementById('art-reader').style.display='block';renderArticle(i);document.getElementById('art-reader').scrollTo(0,0)}
+function showReport(){document.getElementById('project-modal').style.display='flex'}
+function hideReport(){document.getElementById('project-modal').style.display='none'}
+document.getElementById('project-modal').addEventListener('click',function(e){if(e.target===this)hideReport()});
+/* ARTICLES â€” FULL CONTENT */
+const ARTS=[
+{num:"01",chips:["life","ecat"],title:"Searching for the Right Path: Universities, ECAT, and Early Confidence",
+body:`<h3>The beginning</h3>
+<p>My journey toward becoming a computer engineer began with uncertainty but also curiosity. After completing my matriculation and FSc Pre-Engineering with strong marksâ€”above <strong>85% overall</strong>â€”I started researching universities in Pakistan that offered reputable engineering programs. While browsing online, a few names appeared repeatedly: <em>National University of Sciences and Technology, Pakistan Institute of Engineering and Applied Sciences, COMSATS University Islamabad</em>, and especially <em>University of Engineering and Technology Lahore</em>.</p>
+<p>Among these options, UET Lahore stood out because of its long history and reputation in engineering. Many of the other universities seemed financially difficult or complicated in terms of admission requirements. As a result, UET became my primary target.</p>
+<h3>Registering for ECAT</h3>
+<p>Admission to UET requires passing the Engineering College Admission Test, commonly known as ECAT. I registered for the test and paid the challan of about <strong>2500 rupees</strong>. At the time, I thought of it almost like a gamble because ECAT had a reputation for being one of the toughest engineering entry tests in Pakistan.</p>
+<p>Another challenge was timing. My board examinations were approaching, and the FSc syllabus had not been fully covered yet. Preparing for both the board exams and ECAT simultaneously was overwhelming. Because of that, I didn't dedicate as much time to ECAT preparation as many other students did.</p>
+<h3>The first attempt</h3>
+<p>Still, I appeared for the first ECAT attempt with a few friends. Surprisingly, the test felt easier than expected. When the result came, I had scored around <strong>230 out of 400</strong>. Considering my limited preparation, this seemed like a decent result.</p>
+<div class="pq"><p>Surprisingly, the test felt easier than expected. I scored around 230 out of 400. Considering my limited preparation, this seemed like a decent result.</p></div>
+<h3>The overconfidence trap</h3>
+<p>Unfortunately, that small success made us overconfident. Instead of preparing seriously for the second ECAT attempt, we assumed the next test would be similar. Looking back now, that moment of complacency became one of the early lessons in my academic journey: <strong>sometimes a little success can make you underestimate the challenges ahead.</strong></p>
+<p>At that time, I still had not even decided which engineering field I wanted to pursue. I only knew one thing clearlyâ€”I wanted to become an engineer, and I wanted to study at UET Lahore.</p>
+<div class="pq"><p>I only knew one thing clearly â€” I wanted to become an engineer, and I wanted to study at UET Lahore.</p></div>`},
+{num:"02",chips:["life","ecat"],title:"Choosing Computer Engineering and the ECAT Reality Check",
+body:`<h3>Still undecided</h3>
+<p>After the first ECAT attempt, the next major step was submitting applications for specific engineering programs. Strangely, even after taking the test, I still had not decided which field I truly wanted to pursue.</p>
+<p>At that point, I began researching different engineering disciplines online. Two fields appeared repeatedly in discussions about the future of technology: <em>Computer Science</em> and <em>Computer Engineering</em>. At first glance they seemed very similar, but the more I read, the more differences I discovered.</p>
+<h3>Guidance from a senior</h3>
+<p>To get clearer guidance, I contacted a senior student from University of Engineering and Technology Lahore who was studying Computer Engineering. Through WhatsApp, he explained the differences between the two fields. Computer Science focused more on software, algorithms, and programming, while Computer Engineering combined software with hardware, electronics, and computer systems.</p>
+<div class="pq"><p>Ever since I had a computer at home, I had been curious about how it worked. I often opened the casing, experimented with components, and tried fixing small issues myself. Because of that natural curiosity toward hardware and electronics, Computer Engineering felt like the right path.</p></div>
+<h3>Submitting preferences</h3>
+<p>So when the time came to submit my preferences, I targeted Computer Engineering at UET Lahore (A1 category) as my top priority. I also added Computer Science and Electrical Engineering as backup options. Based on previous years' merit listsâ€”many of which closed below 80% aggregateâ€”I believed my chances were strong.</p>
+<h3>The second attempt</h3>
+<p>However, the second ECAT attempt brought an unexpected challenge. Unlike the first test, the second ECAT was significantly harder. The questions were deeper and required more practice. Since I had not prepared seriously after my first attempt, the test felt much more difficult.</p>
+<p>When the results came, my score dropped to around <strong>217 out of 400</strong>. After combining my strong board results with the ECAT score, my final aggregate came out to about <strong>74%</strong>.</p>
+<p>While this was still respectable, it turned out to be slightly below the merit required for Computer Engineering at the Lahore main campus. Another mistake complicated things further: my program preferences were not arranged optimally, which prevented me from qualifying for some alternative seats.</p>
+<div class="pq"><p>For the first time in the process, I realized that small decisions â€” like preparation and preference ordering â€” could significantly influence the final outcome.</p></div>`},
+{num:"03",chips:["life","hostel"],title:"Arrival at Faisalabad: First Impressions and an Unexpected Beginning",
+body:`<h3>Accepting the offer</h3>
+<p>When the admission process ended, I finally received an offer for Computer Engineering at the Faisalabad campus of University of Engineering and Technology Lahore. Although my original goal had been the Lahore main campus, I decided to accept the opportunity. The closing merit for Computer Engineering at Faisalabad had been around <strong>59%</strong>, while my aggregate was roughly <strong>74%</strong>, so I felt confident that I should continue my journey there.</p>
+<h3>The first visit</h3>
+<p>Around that time, severe floods had affected many parts of Pakistan. Because of the situation, universities remained closed for nearly fifteen days. The campus was still not fully active when a few friends and I decided to travel to Faisalabad two days before the official hostel allotment date. Our plan was simple: submit our documents early if possible and take a look at the place where we would spend the next four years.</p>
+<p>It was my first visit to Faisalabad. When I got off the bus and asked for directions to UET, I expected the location to be familiar to the locals. Surprisingly, the rickshaw driver was unsure where the university was. I had to guide him using directions from Google Maps. That small moment created an uneasy feeling in my mind. I wondered whether I had made the right decision if even local people seemed unfamiliar with the campus.</p>
+<div class="pq"><p>The grass had grown nearly two feet high, leaves and branches were scattered across the roads, and the environment felt more like an abandoned area than an active university.</p></div>
+<h3>A deserted campus</h3>
+<p>When we finally arrived, the surroundings looked isolated. The university was located several kilometers away from the main residential areas and bazaars of the city. Because the campus had been closed for days due to the floods and vacation period, the place appeared almost deserted. The grass had grown nearly two feet high, leaves and branches were scattered across the roads, and the environment felt more like an abandoned area than an active university.</p>
+<p>The administrative office was barely open, and when I tried to submit my documents, the staff informed me that submissions would only start on the official allotment day two days later. After traveling all that distance, hearing that was disappointing.</p>
+<h3>The hostel</h3>
+<p>Later, we contacted the hostel warden and requested permission to see the hostel buildings. He allowed us to visit one hostel, and a guard showed us a few rooms. Each room accommodated <strong>five students</strong> with attached bathrooms, but the condition was basic. While we were looking around, the guard casually mentioned that <strong>snakes were sometimes seen</strong> in the campus greenery during summer. Hearing that while looking at the overgrown grass around the university only made the place feel even more like a forest.</p>
+<p>Despite these uneasy first impressions, our visit that day was only temporary. Since the administration had clearly told us that document submission would start on the official allotment day, there was nothing more we could do. After spending a few hours walking around the campus and seeing the hostel building, we decided to return home and come back on the scheduled date.</p>
+<h3>Coming back</h3>
+<p>Two days later, we returned again to the Faisalabad campus of University of Engineering and Technology Lahore. This time the situation felt different. More students were arriving, administrative offices were working normally, and the campus slowly began to feel alive rather than deserted.</p>
+<h3>The security fee surprise</h3>
+<p>Just when we thought the difficult part of the admission process was over, another unexpected situation appeared during hostel allotment. When we reached the hostel office for room allocation, we were informed that every student had to immediately submit a security fee of <strong>12,000 PKR</strong> for the hostel mess. The problem was not the fee itself â€” the problem was how it had to be paid. The administration told us that the payment had to be made in cash at that very moment. None of us had expected this.</p>
+<p>I was standing there with two of my classmates and close friends from my city, <strong>Muhammad Zain</strong> and <strong>Ali Shirazi</strong>, and we suddenly realized that we did not have that much cash with us. For a few minutes, we genuinely thought that we might not be able to secure our hostel rooms that day.</p>
+<p>Fortunately, my elder brother had come with me to help during the admission process. He had enough cash with him and quickly helped us by providing the required amount so that we could submit the fee. Thanks to his help, all three of us were able to complete the payment and continue with the hostel allotment process. Later we discovered something slightly frustrating â€” the fee could actually be paid online as well, but at that moment we were only told about the cash option.</p>
+<div class="pq"><p>"For a few minutes it felt like the entire hostel plan might collapse because of one unexpected payment."</p></div>
+<p>Although the situation was resolved quickly, that short moment of panic became one of the earliest lessons of university life: <strong>always be prepared for unexpected requirements.</strong> Looking back now, it feels like a small incident, but at that time it added to the excitement, confusion, and nervousness of the very first day at the university.</p>
+<h3>The real journey begins</h3>
+<p>The first couple of days were mainly introductory sessions. Teachers explained the structure of the semester and briefly introduced the subjects we would study. During those early days, one experience stood out to me in particular.</p>
+<p>In our Programming Fundamentals lab, the instructor guided us through setting up the programming environment on the lab computers. For many students it was a simple technical step, but for me it felt like the first real connection to the field I had chosen. We installed the Python programming language and the editor Visual Studio Code.</p>
+<p>Although it was a small task, it marked an important moment. After weeks of uncertaintyâ€”from ECAT preparation to admission decisions and the strange first impressions of the campusâ€”it finally felt like the real journey into computer engineering had begun.</p>`},
+{num:"04",chips:["pf","academic"],title:"Programming Was a Foreign Language",
+body:`<h3>A completely new world</h3>
+<p>When I entered the Computer Engineering program at the University of Engineering and Technology Lahore Faisalabad campus, I quickly realized something: I had almost <strong>no real programming background</strong>.</p>
+<p>Unlike some classmates who had studied computing before, I had come from an FSc Pre-Engineering background. Most of my education had revolved around mathematics, physics, and theoretical subjects. Programming, however, felt completely different. It was not just another subject â€” it felt like learning an entirely new language.</p>
+<p>During the early classes of Programming Fundamentals, terms like <em>loops, variables</em>, and <em>functions</em> were being discussed. I remember sitting there wondering what exactly these words meant in a programming context.</p>
+<p>At that time, I honestly didn't even understand something as basic as what a loop really did.</p>
+<p>Yet something interesting happened. Even though it felt unfamiliar, it also sparked curiosity inside me.</p>
+<div class="pq"><p>"I didn't know what a loop was. But something in the Programming Fundamentals class sparked curiosity for the first time."</p></div>
+<p>Programming slowly started to feel less like a foreign concept and more like a puzzle waiting to be solved.</p>
+<h3>The beginning of curiosity</h3>
+<p>The subject that once seemed intimidating gradually became the one I was most curious about. Every lecture revealed something new â€” a small piece of logic that made computers behave in ways I had never imagined before.</p>
+<p>That curiosity became the starting point of my journey in programming.</p>`},
+{num:"05",chips:["pf","growth"],title:"Dr. Bilal's First Lecture: Skills Over Labels",
+body:`<h3>An unexpected conversation</h3>
+<p>One of the most memorable early experiences in my university life came from the first lecture of our Programming Fundamentals instructor, <strong>Dr. Bilal</strong>.</p>
+<p>Instead of immediately opening slides or starting technical explanations, he began with a casual conversation. He talked about university life, hostel struggles, and the transition students face when moving away from home for the first time.</p>
+<p>Many of us were still adjusting to the new environment, and this relaxed discussion made the class feel much more comfortable.</p>
+<p>Then he asked a question that caught everyone's attention. He asked if we knew the difference between <strong>PEC and NCEAC</strong> accreditation in Pakistan. Many students, including myself, were unsure about the details.</p>
+<p>Dr. Bilal explained that some programs are recognized by the Pakistan Engineering Council, while others fall under computing accreditation bodies like NCEAC. Naturally, this made several students worried about how it might affect our future.</p>
+<p>Then he said something that stayed with me.</p>
+<div class="pq"><p>"In the real world, people don't ask about the label of your degree. They ask what you can build."</p></div>
+<h3>A shift in mindset</h3>
+<p>That statement changed the way many of us thought about our studies. Instead of worrying about titles and labels, the focus shifted toward building real skills. Programming wasn't just another subject to pass; it was a tool that could help us create meaningful things.</p>
+<p>For me, that lecture replaced uncertainty with motivation.</p>`},
+{num:"06",chips:["pf","academic"],title:"The Wrong Lab That Taught Me Responsibility",
+body:`<h3>A small mistake</h3>
+<p>At the beginning of the semester, our class was divided into two groups: <strong>G1 and G2</strong>.</p>
+<p>I was assigned to Group 2. However, during one of the early lab sessions, confusion about the schedule caused several students â€” including me â€” to attend the wrong laboratory.</p>
+<p>Instead of going to our AICTE lab, we went to the Programming Fundamentals lab with the other group.</p>
+<p>During that lab session, we learned how to install the Visual Studio Code editor and set up the Python programming environment. It was actually a very useful and interesting session.</p>
+<p>Unfortunately, we later realized that we were supposed to be in a different lab entirely.</p>
+<h3>The consequence</h3>
+<p>Because we attended the wrong lab, our attendance for the AICTE session was marked absent, and the marks for that lab were deducted.</p>
+<p>At first it felt frustrating, but it also taught an important lesson.</p>
+<div class="pq"><p>"One wrong room can teach you the importance of double-checking everything."</p></div>
+<p>From that day onward, I became much more careful about schedules, announcements, and course instructions.</p>`},
+{num:"07",chips:["life","growth"],title:"Learning Responsibility in University Life",
+body:`<h3>Adjusting to independence</h3>
+<p>University life was very different from college. For the first time in my life, I was living in a hostel away from home.</p>
+<p>Although I was not completely alone â€” my friend <strong>Muhammad Zain</strong>, whom I had known for two years, was also enrolled in Computer Engineering â€” the environment was still unfamiliar.</p>
+<p>Another friend from my FSc class, <strong>Ali Shirazi</strong>, joined the same hostel as well. Even though he was studying Chemical Engineering, it felt reassuring to have familiar faces around.</p>
+<p>We were all from the same city and had shared classrooms before, which made the transition easier.</p>
+<h3>Expectations and pressure</h3>
+<p>At the same time, I also felt a strong sense of responsibility from my family.</p>
+<p>My elder brother is a doctor who graduated with distinction and even received a <strong>gold medal</strong> for academic excellence. My sister had also been a <strong>top student</strong> in her university.</p>
+<p>Because of their achievements, I felt a silent expectation that I should also perform well in my studies.</p>
+<div class="pq"><p>"I knew I had to prove myself. Not out of fear, but because I wanted to live up to the standards set by my family."</p></div>
+<p>Instead of discouraging me, that pressure slowly became a source of motivation.</p>`},
+{num:"08",chips:["pf","academic"],title:"The First Quiz That Changed My Confidence",
+body:`<h3>Preparing seriously</h3>
+<p>The first quiz of Programming Fundamentals was approaching, and it was an important one because the course carried <strong>three credit hours</strong>, making it one of the most significant subjects of the semester.</p>
+<p>My friends and I started preparing together.</p>
+<p>Late nights were spent studying concepts, practicing problems, and reviewing the material shared by Dr. Bilal, including his <strong>Hands-On Python</strong> notes.</p>
+<p>My friend Zain already had a small background in coding, and studying together helped me understand several concepts much faster.</p>
+<h3>The result</h3>
+<p>When the quiz results were announced, something surprising happened.</p>
+<p>Only <strong>three students</strong> in the entire class scored full marks, and I was one of them.</p>
+<div class="pq"><p>"Getting full marks in that first quiz gave me confidence I had never felt before."</p></div>
+<p>That moment made me realize that even without a prior programming background, I could still succeed if I worked hard enough.</p>`},
+{num:"09",chips:["pf","growth"],title:"Midterms Proved I Belonged Here",
+body:`<h3>A challenging period</h3>
+<p>As the semester progressed, the midterm examinations approached. The workload increased significantly, and students started taking their studies more seriously.</p>
+<p>Group study sessions became common in the hostel. My friends and I would gather together to review lecture notes, discuss problems, and help each other understand difficult topics.</p>
+<p>Dr. Bilal remained one of the most supportive instructors during this period. He was always available to answer questions, even outside class hours.</p>
+<h3>The outcome</h3>
+<p>When the midterm results were announced, I had scored <strong>35 out of 40</strong> in Programming Fundamentals.</p>
+<p>It was a strong result and confirmed something important.</p>
+<div class="pq"><p>"Midterms showed me that I truly belonged in this program."</p></div>
+<p>For the first time, I started believing that I could perform among the top students in the class.</p>`},
+{num:"10",chips:["pf","ml","growth"],title:"Finishing the Semester at the Top",
+body:`<h3>The final project</h3>
+<p>As the semester neared its end, we were assigned a Programming Fundamentals project related to machine learning concepts.</p>
+<p>Together with my friend Zain, I developed a <strong>weather prediction model</strong> using historical weather data from Europe. The model attempted to predict temperature patterns and rainfall based on past data.</p>
+<p>Although it was a small academic project, it was my first experience working with real data and applying programming concepts to a practical problem.</p>
+<h3>The presentation day</h3>
+<p>When the time came to present our project, every group had to demonstrate their work in front of the instructor using the classroom multimedia system.</p>
+<p>All of our code, dataset, and project files were stored on my laptop. The system in the presentation room required a wired multimedia connection to display the screen on the projector.</p>
+<p>Before the presentation began, our instructor Dr. Bilal asked each group to quickly check whether their system could connect to the projector.</p>
+<p>When I connected my laptop to the multimedia cable, something unexpected happened â€” the projector simply <strong>would not recognize my laptop</strong>. No matter how many times I tried adjusting the connection or changing display settings, the screen refused to appear on the projector.</p>
+<p>For a moment, it felt like the entire presentation might collapse before it even started.</p>
+<h3>Solving the problem quickly</h3>
+<p>We didn't have much time to troubleshoot the issue. So we quickly transferred all our files â€” the code, datasets, and presentation material â€” to another student's laptop that was successfully connected to the projector.</p>
+<p>Thankfully, everything copied correctly, and we were able to continue with the presentation.</p>
+<h3>A tense moment during execution</h3>
+<p>Our project involved processing a relatively large dataset. During the encoding stage, the algorithm had to generate a large number of trees before producing the final output.</p>
+<p>When we executed the code in the terminal, it did not immediately produce results. Instead, the program required <strong>two to three minutes</strong> of processing time before showing the output.</p>
+<p>Naturally, the room became quiet.</p>
+<p>We informed Dr. Bilal that the program needed some time to run, and he calmly nodded in agreement.</p>
+<p>While the code was running, we used the time to explain the structure of our dataset and how it represented real-world weather data collected over multiple years.</p>
+<h3>The output finally appeared</h3>
+<p>After what felt like a long wait, the program finally produced its results in the terminal.</p>
+<p>Seeing the output appear on the screen brought a huge sense of relief.</p>
+<p>The demonstration worked, the explanation was clear, and the presentation was successfully completed despite the earlier technical difficulties.</p>
+<div class="pq"><p>"That moment reminded me that programming projects rarely go perfectly â€” but problem-solving under pressure is part of the learning experience."</p></div>
+<h3>The final exams</h3>
+<p>Final exam preparation was intense. Many of my classmates gathered in my hostel room for group study sessions. We spent long hours reviewing concepts and solving practice questions.</p>
+<p>The effort paid off.</p>
+<p>I scored over <strong>90 marks</strong> in Programming Fundamentals, earning one of the highest scores in the course. I also performed well in Discrete Mathematics, achieving the <strong>highest marks across both sections</strong>.</p>
+<h3>A memorable result</h3>
+<p>When the semester results were announced, I achieved a GPA of <strong>3.94</strong>, making me the <strong>top student</strong> of my first semester in Computer Engineering.</p>
+<div class="pq"><p>"The semester that began with uncertainty ended with confidence and achievement."</p></div>
+<p>Looking back, it was not just about grades. It was about discovering what I was capable of achieving through persistence, curiosity, and teamwork.</p>`},
+
+{num:"11",chips:["semester2","database","scholarship"],title:"Beginning of the Second Semester",
+body:`<h3>New Subjects</h3>
+<p>When the second semester began, I entered the classroom with excitement and curiosity. Several new subjects had been introduced in our timetable, including Digital Logic Design (DLD), Calculus II, Database Systems, Object-Oriented Programming, and Communication Skills. Each subject seemed interesting and challenging, and I was eager to start learning them.</p>
+<h3>Missing the First Lab</h3>
+<p>However, at the very beginning of the semester, I had to miss my first Database Systems lab. The reason was that I had to visit the main university campus for an interview related to a scholarship program organized by the Higher Education Commission of Pakistan. At the same time when we were traveling to the main campus, the first database lab and two theory lectures were conducted. In total, I missed almost five hours of database classes, which felt like a great loss because the early lectures usually build the foundation of the subject.</p>
+<div class="pq"><p>Still, it was a winâ€“win situation. I decided to go for the scholarship interview because such opportunities are rare and important for students.</p></div>
+<p>After attending the interview at the main campus, I returned to the university and contacted my classmates to ask what had been covered in the lab.</p>
+<p>Fortunately, my friends told me that the instructor had mainly explained the basic setup of the database environment, and no advanced concepts had been discussed yet. This made me feel relieved because I knew I could easily catch up with the missed material.</p>`},
+
+{num:"12",chips:["database","practical"],title:"Setting Up the Database Lab",
+body:`<h3>Getting Help from Dr. Bilal</h3>
+<p>In the next database lab session, I approached our instructor, Dr. Bilal, and politely asked him to repeat the instructions for the students who had missed the previous class. He was very cooperative and briefly explained the setup process again.</p>
+<h3>First Practical Experience</h3>
+<p>During that session, I was instructed to download and install MySQL Server and MySQL Workbench on my laptop. These tools were necessary for performing database tasks and practicing SQL queries.</p>
+<p>I carefully followed the instructions and successfully installed the software. After completing the setup, I started performing basic operations such as creating databases, creating tables, and inserting data into them. It was my first practical experience with a proper database management system, and it felt exciting to see how data could be organized and manipulated using SQL commands.</p>
+<p>While working in the lab, I realized that databases play an important role in managing large amounts of structured data efficiently. This experience increased my interest in learning more about database systems and their real-world applications.</p>`},
+
+{num:"13",chips:["entrepreneurship","inspiration"],title:"A Creative Business Idea from Our Teacher",
+body:`<h3>The Lab Manual Issue</h3>
+<p>During the semester, another issue arose in our class regarding lab manuals. Many students, including myself, were concerned about the cost and difficulty of printing the manuals.</p>
+<p>Previously, we had spent around 2500 rupees per student printing manuals for another course. Printing was expensive, and sometimes the university printers were unavailable or not working properly. Because of these difficulties, the whole class decided to talk to our instructor and request permission to submit the manuals in soft copy format instead of printed copies.</p>
+<h3>Teacher's Brilliant Suggestion</h3>
+<p>When we discussed this with Dr. Bilal, he gave us a very interesting suggestion. Instead of only focusing on the problem, he encouraged us to look at it as a business opportunity.</p>
+<p>He suggested that four or five students could collectively buy a printer and provide printing services for other students in the university. He even said that if a student wanted to start the idea but had no partners, he would be willing to join and support the initiative.</p>
+<p>He further suggested creating a simple website where students could upload their files and request printing services. This idea was very inspiring because it showed us how technology and entrepreneurship could solve everyday problems. It was motivating to see a teacher encouraging students to think creatively and develop practical solutions.</p>`},
+
+{num:"14",chips:["ramadan","online","current"],title:"Ramadan, Global Tensions, and the Shift to Online Classes",
+body:`<h3>Ramadan Begins</h3>
+<p>As the semester continued, the holy month of Ramadan began. Because of Ramadan, the pace of lectures became slightly slower so that students and teachers could manage their schedules more comfortably.</p>
+<h3>Unexpected Global Event</h3>
+<p>Around the time when we were preparing for our first quiz, an unexpected international situation occurred. A conflict between Iran and the United States created serious tensions in the region. As a result, the important oil trade route known as the Strait of Hormuz was closed for some time.</p>
+<p>This caused shortages of petroleum and fuel in many areas, which affected transportation and daily activities. Because of these difficulties, the government decided to shift many activities, including education, to online systems.</p>
+<p>Our university also announced that classes would be conducted online, and students were advised to return to their homes. Therefore, I had to leave the hostel and travel back home.</p>
+<p>The journey was not easy because online classes had already started during that time. While traveling by train, I experienced internet connectivity issues and unfortunately missed two or three lectures of different subjects.</p>
+<p>After finally reaching home, I continued attending online classes regularly starting from March 19. Initially, the university announced that online classes would continue until March 31, but there was uncertainty about whether the period would be extended.</p>
+<div class="pq"><p>Although the situation was challenging, it showed how quickly education systems can adapt during unexpected circumstances.</p></div>`}
+];
+function buildIndex(){const l=document.getElementById('art-index-list');l.innerHTML=';
+  ARTS.forEach((a,i)=>{const ch=a.chips.map(c=>`<span class="chip">${c.toUpperCase()}</span>`).join(');
+    l.innerHTML+=`<div class="airow rv" onclick="openArticle(${i})"><div class="airn">${a.num}</div><div><div class="airowt">${a.title}</div><div class="aichips">${ch}</div></div><div class="aiarr">â†’</div></div>`});
+  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el))}
+function renderArticle(i){const a=ARTS[i];
+  const ch=a.chips.map(c=>`<span class="chip">${c.toUpperCase()}</span>`).join(');
+  const p=i>0?`<button class="anb" onclick="renderArticle(${i-1});document.getElementById('art-reader').scrollTo(0,0)"><span class="dir">â† Previous</span><span class="ttl">${ARTS[i-1].title}</span></button>`:`<div></div>`;
+  const n=i<ARTS.length-1?`<button class="anb right" onclick="renderArticle(${i+1});document.getElementById('art-reader').scrollTo(0,0)"><span class="dir">Next â†’</span><span class="ttl">${ARTS[i+1].title}</span></button>`:`<div></div>`;
+  document.getElementById('ar-content').innerHTML=`<div class="arhdr"><div class="arnum">${a.num}</div><div class="artchips">${ch}</div><h1 class="arh1">${a.title}</h1><div class="arby"><span>Muhammad Tahir Yaqoob</span> Â· <span>BS CE Â· UET Faisalabad</span></div></div><div class="arbody">${a.body}</div><div class="arnav">${p}<button class="anback" onclick="goBlog()">Back to Blog</button>${n}</div>`}
+buildIndex();
+showPage('index');
+</script>
+</body>
+</html>
+
+
