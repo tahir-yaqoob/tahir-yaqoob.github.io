@@ -11,6 +11,8 @@ defaults:
       layout: post
       article_label: Journey Post
       meta: Computer Engineering Journey
+      hero_image: /assets/article-visuals/journey-default.svg
+      hero_image_alt: Abstract computer engineering illustration
 author:
   name: Muhammad Tahir Yaqoob
   program: BS Computer Engineering

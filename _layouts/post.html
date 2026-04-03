@@ -60,16 +60,23 @@
           </div>
           {% endif %}
         </div>
-        {{ content }}
+        {% if page.hero_image %}
+        <figure class="article-cover">
+          <img src="{{ page.hero_image | relative_url }}" alt="{{ page.hero_image_alt | default: page.title }}" loading="eager" decoding="async">
+        </figure>
+        {% endif %}
+        <div class="article-content">
+          {{ content }}
+        </div>
         <div class="article-nav">
-          {% if page.previous %}
-          <a class="button secondary" href="{{ page.previous.url | relative_url }}">Previous</a>
+          {% if page.next %}
+          <a class="button secondary" href="{{ page.next.url | relative_url }}">Previous</a>
           {% else %}
           <span></span>
           {% endif %}
           <a class="button secondary" href="{{ '/blog.html' | relative_url }}">Back to Blog</a>
-          {% if page.next %}
-          <a class="button primary" href="{{ page.next.url | relative_url }}">Next Article</a>
+          {% if page.previous %}
+          <a class="button primary" href="{{ page.previous.url | relative_url }}">Next Article</a>
           {% else %}
           <span></span>
           {% endif %}
