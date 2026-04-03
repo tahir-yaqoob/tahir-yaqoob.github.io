@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Blog | {{ profile.name }}</title>
+  <title>Blog | {{ profile.name }}</title>
   <meta name="description" content="Blog page containing the article links and story posts from {{ profile.name }}'s computer engineering journey.">
   <script>
     (function () {
@@ -31,7 +31,7 @@
         <nav class="nav-links" id="primary-nav">
           <a href="{{ '/index.html' | relative_url }}">Home</a>
           <a href="{{ '/about.html' | relative_url }}">About</a>
-          <a class="active" href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
+          <a class="active" href="{{ '/blog.html' | relative_url }}">Blog</a>
           <a href="{{ '/contact.html' | relative_url }}">Contact</a>
         </nav>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">
@@ -50,8 +50,8 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <span class="eyebrow">Journey Blog</span>
-        <h1 class="section-title">Posts from my computer engineering journey</h1>
+        <span class="eyebrow">Blog</span>
+        <h1 class="section-title">Articles from my computer engineering journey</h1>
         <p class="section-intro">A collection of milestones, lessons, and turning points from my path into computer engineering. Open any post to read the full story.</p>
       </div>
     </section>
@@ -62,8 +62,7 @@
           <div class="filter-bar" data-filter-bar></div>
         </div>
         <div class="post-grid" data-post-grid>
-          {% assign ordered_posts = site.posts | sort: "date" %}
-          {% for post in ordered_posts %}
+          {% for post in site.posts %}
           <article class="post-card" data-tags="{{ post.tags | join: ',' | downcase }}">
             {% if post.hero_image %}
             <div class="post-card-media">

@@ -2,6 +2,29 @@
 ---
 {% assign profile = site.data.profile %}
 {% assign total_journey_posts = site.posts.size %}
+{% assign latest_home_gpa = '' %}
+{% assign latest_home_programming_score = '' %}
+{% assign latest_home_semester_position = '' %}
+{% for post in site.posts %}
+  {% if latest_home_gpa == '' and post.homepage_gpa %}
+    {% assign latest_home_gpa = post.homepage_gpa %}
+  {% endif %}
+  {% if latest_home_programming_score == '' and post.homepage_programming_score %}
+    {% assign latest_home_programming_score = post.homepage_programming_score %}
+  {% endif %}
+  {% if latest_home_semester_position == '' and post.homepage_semester_position %}
+    {% assign latest_home_semester_position = post.homepage_semester_position %}
+  {% endif %}
+{% endfor %}
+{% if latest_home_gpa == '' %}
+  {% assign latest_home_gpa = profile.default_home_gpa %}
+{% endif %}
+{% if latest_home_programming_score == '' %}
+  {% assign latest_home_programming_score = profile.default_home_programming_score %}
+{% endif %}
+{% if latest_home_semester_position == '' %}
+  {% assign latest_home_semester_position = profile.default_home_semester_position %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +55,7 @@
         <nav class="nav-links" id="primary-nav">
           <a class="active" href="{{ '/index.html' | relative_url }}">Home</a>
           <a href="{{ '/about.html' | relative_url }}">About</a>
-          <a href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
+          <a href="{{ '/blog.html' | relative_url }}">Blog</a>
           <a href="{{ '/contact.html' | relative_url }}">Contact</a>
         </nav>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">
@@ -96,16 +119,16 @@
             <div class="stat-label">Journey Posts</div>
           </div>
           <div class="stat">
-            <div class="stat-value">3.94</div>
-            <div class="stat-label">First Semester GPA</div>
+            <div class="stat-value">{{ latest_home_gpa }}</div>
+            <div class="stat-label">Latest GPA</div>
           </div>
           <div class="stat">
-            <div class="stat-value">90+</div>
+            <div class="stat-value">{{ latest_home_programming_score }}</div>
             <div class="stat-label">Programming Score</div>
           </div>
           <div class="stat">
-            <div class="stat-value">Top</div>
-            <div class="stat-label">Semester Position</div>
+            <div class="stat-value">{{ latest_home_semester_position }}</div>
+            <div class="stat-label">Latest Position</div>
           </div>
         </div>
       </div>

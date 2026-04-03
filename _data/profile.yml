@@ -19,3 +19,6 @@ drive_text_one: I want to become an engineer who can understand systems deeply a
 drive_text_two: From being curious about computer components at home to learning programming in university, I have grown through persistence, practical study, and a genuine interest in both the hardware and software sides of computer engineering.
 visual_note: I enjoy the connection between hardware structures, software logic, and the systems thinking that brings them together inside real computer engineering work.
 signature_quote: '"The semester that began with uncertainty ended with confidence and achievement."'
+default_home_gpa: "3.94"
+default_home_programming_score: "90+"
+default_home_semester_position: "Top"

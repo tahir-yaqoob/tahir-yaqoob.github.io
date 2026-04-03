@@ -70,6 +70,7 @@ html[data-theme="light"] body::before {
 }
 
 a { color: inherit; }
+h1, h2, h3 { color: var(--text); }
 
 .site-header {
   position: sticky;
@@ -78,6 +79,10 @@ a { color: inherit; }
   backdrop-filter: blur(18px);
   background: rgba(6, 16, 28, 0.78);
   border-bottom: 1px solid var(--line);
+}
+
+html[data-theme="light"] .site-header {
+  background: rgba(247, 251, 255, 0.88);
 }
 
 .nav-wrap,
@@ -143,6 +148,13 @@ a { color: inherit; }
   background: rgba(255, 255, 255, 0.04);
 }
 
+html[data-theme="light"] .nav-links a:hover,
+html[data-theme="light"] .nav-links a.active {
+  color: var(--text);
+  border-color: rgba(11, 125, 176, 0.18);
+  background: rgba(11, 125, 176, 0.1);
+}
+
 .theme-toggle,
 .menu-toggle {
   border: 1px solid var(--line);
@@ -176,7 +188,8 @@ a { color: inherit; }
 
 html[data-theme="light"] .theme-toggle,
 html[data-theme="light"] .menu-toggle {
-  background: rgba(11, 125, 176, 0.06);
+  background: rgba(11, 125, 176, 0.08);
+  border-color: rgba(11, 125, 176, 0.16);
 }
 
 .menu-toggle {
@@ -264,6 +277,10 @@ html[data-theme="light"] .menu-toggle {
   text-transform: uppercase;
 }
 
+html[data-theme="light"] .eyebrow {
+  background: rgba(14, 170, 134, 0.12);
+}
+
 h1, h2, h3 { margin: 0; line-height: 1.12; }
 
 .hero-main h1 {
@@ -326,6 +343,7 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
   text-decoration: none;
   font-weight: 700;
   transition: 0.25s ease;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 .button.primary {
@@ -336,10 +354,48 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
 
 html[data-theme="light"] .button.primary {
   color: #ffffff;
+  box-shadow: 0 14px 30px rgba(11, 125, 176, 0.2);
+}
+
+.button.secondary {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html[data-theme="light"] .button.secondary {
+  background: rgba(11, 125, 176, 0.08);
+  border-color: rgba(11, 125, 176, 0.18);
 }
 
 .button.secondary:hover,
 .button.primary:hover { transform: translateY(-2px); }
+
+.button.secondary:hover {
+  background: rgba(105, 210, 231, 0.12);
+}
+
+html[data-theme="light"] .button.secondary:hover {
+  background: rgba(11, 125, 176, 0.14);
+}
+
+.button:focus-visible,
+.theme-toggle:focus-visible,
+.menu-toggle:focus-visible,
+.nav-links a:focus-visible,
+.filter-chip:focus-visible,
+.post-link:focus-visible {
+  outline: 3px solid rgba(105, 210, 231, 0.4);
+  outline-offset: 3px;
+}
+
+html[data-theme="light"] .button:focus-visible,
+html[data-theme="light"] .theme-toggle:focus-visible,
+html[data-theme="light"] .menu-toggle:focus-visible,
+html[data-theme="light"] .nav-links a:focus-visible,
+html[data-theme="light"] .filter-chip:focus-visible,
+html[data-theme="light"] .post-link:focus-visible {
+  outline-color: rgba(11, 125, 176, 0.36);
+}
 
 .hero-side {
   width: min(100%, 980px);
@@ -375,6 +431,13 @@ html[data-theme="light"] .button.primary {
   padding: 1.2rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+html[data-theme="light"] .profile-tile,
+html[data-theme="light"] .highlight-box,
+html[data-theme="light"] .stat {
+  background: rgba(11, 125, 176, 0.05);
+  border-color: rgba(11, 125, 176, 0.08);
 }
 
 .mini-list { display: grid; gap: 0.65rem; }
@@ -505,6 +568,12 @@ html[data-theme="light"] .button.primary {
     rgba(255, 255, 255, 0.03);
 }
 
+html[data-theme="light"] .post-card-media {
+  background:
+    linear-gradient(135deg, rgba(11, 125, 176, 0.08), rgba(11, 125, 176, 0.02)),
+    rgba(255, 255, 255, 0.85);
+}
+
 .post-card-media img {
   width: 100%;
   height: 100%;
@@ -574,6 +643,19 @@ html[data-theme="light"] .button.primary {
   background: rgba(105, 210, 231, 0.11);
 }
 
+html[data-theme="light"] .filter-chip,
+html[data-theme="light"] .post-tag {
+  background: rgba(11, 125, 176, 0.05);
+  border-color: rgba(11, 125, 176, 0.12);
+}
+
+html[data-theme="light"] .filter-chip.is-active,
+html[data-theme="light"] .filter-chip:hover,
+html[data-theme="light"] .post-tag {
+  background: rgba(11, 125, 176, 0.12);
+  border-color: rgba(11, 125, 176, 0.2);
+}
+
 .post-tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -607,6 +689,10 @@ html[data-theme="light"] .button.primary {
   border-radius: 16px;
   background: rgba(105, 210, 231, 0.06);
   color: var(--muted);
+}
+
+html[data-theme="light"] .contact-note {
+  background: rgba(11, 125, 176, 0.08);
 }
 
 .site-footer {
@@ -701,6 +787,11 @@ html[data-theme="light"] .button.primary {
   color: var(--text);
   font-size: 1.08rem;
   line-height: 1.7;
+}
+
+html[data-theme="light"] .article-content blockquote,
+html[data-theme="light"] .pull-quote {
+  background: rgba(11, 125, 176, 0.06);
 }
 
 .article-content blockquote p {
