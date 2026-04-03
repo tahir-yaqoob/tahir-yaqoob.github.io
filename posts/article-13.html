@@ -4,21 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article 13 | Muhammad Tahir Yaqoob</title>
+    <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("portfolio-theme");
+        if (savedTheme) {
+          document.documentElement.setAttribute("data-theme", savedTheme);
+        }
+      } catch (error) {}
+    })();
+  </script>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body class="article-page">
-  <header class="site-header">
+    <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="../index.html">
         <span class="brand-title">Muhammad Tahir Yaqoob</span>
         <span class="brand-sub">Computer Engineering Portfolio</span>
       </a>
-      <nav class="nav-links">
-        <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a class="active" href="../blog.html">Journey Blog</a>
-        <a href="../contact.html">Contact</a>
-      </nav>
+      <div class="nav-tools">
+        <nav class="nav-links" id="primary-nav">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a class="active" href="../blog.html">Journey Blog</a>
+          <a href="../contact.html">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1.2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 14.8a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.2a1 1 0 0 1 1-1Zm8-6.8a1 1 0 0 1 0 2h-1.2a1 1 0 1 1 0-2H20ZM6.4 12a1 1 0 0 1-1 1H4.2a1 1 0 1 1 0-2h1.2a1 1 0 0 1 1 1Zm9.14-5.74a1 1 0 0 1 1.42 0l.85.85a1 1 0 0 1-1.41 1.42l-.86-.86a1 1 0 0 1 0-1.41Zm-9.35 9.34a1 1 0 0 1 1.41 0l.86.86a1 1 0 1 1-1.42 1.41l-.85-.85a1 1 0 0 1 0-1.42Zm11.47 1.42a1 1 0 0 1-1.41 0l-.86-.86a1 1 0 0 1 1.42-1.41l.85.85a1 1 0 0 1 0 1.42ZM8.46 7.53A1 1 0 0 1 7.05 8.94L6.2 8.09A1 1 0 0 1 7.6 6.67l.86.86ZM12 7.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Z"/></svg>
+          <span data-theme-label>Dark</span>
+        </button>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
   <main>
@@ -43,5 +64,7 @@
       </div>
     </section>
   </main>
+  <script src="../script.js" defer></script>
 </body>
 </html>
+

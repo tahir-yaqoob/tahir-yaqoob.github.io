@@ -1,27 +1,49 @@
 ---
 ---
+{% assign profile = site.data.profile %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Muhammad Tahir Yaqoob</title>
-  <meta name="description" content="About Muhammad Tahir Yaqoob and the story behind his computer engineering journey.">
+  <title>About | {{ profile.name }}</title>
+  <meta name="description" content="About {{ profile.name }} and the story behind his computer engineering journey.">
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("portfolio-theme");
+        if (savedTheme) {
+          document.documentElement.setAttribute("data-theme", savedTheme);
+        }
+      } catch (error) {}
+    })();
+  </script>
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="{{ '/index.html' | relative_url }}">
-        <span class="brand-title">Muhammad Tahir Yaqoob</span>
-        <span class="brand-sub">Computer Engineering Portfolio</span>
+        <span class="brand-title">{{ profile.name }}</span>
+        <span class="brand-sub">{{ profile.site_label }}</span>
       </a>
-      <nav class="nav-links">
-        <a href="{{ '/index.html' | relative_url }}">Home</a>
-        <a class="active" href="{{ '/about.html' | relative_url }}">About</a>
-        <a href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
-        <a href="{{ '/contact.html' | relative_url }}">Contact</a>
-      </nav>
+      <div class="nav-tools">
+        <nav class="nav-links" id="primary-nav">
+          <a href="{{ '/index.html' | relative_url }}">Home</a>
+          <a class="active" href="{{ '/about.html' | relative_url }}">About</a>
+          <a href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
+          <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1.2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 14.8a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.2a1 1 0 0 1 1-1Zm8-6.8a1 1 0 0 1 0 2h-1.2a1 1 0 1 1 0-2H20ZM6.4 12a1 1 0 0 1-1 1H4.2a1 1 0 1 1 0-2h1.2a1 1 0 0 1 1 1Zm9.14-5.74a1 1 0 0 1 1.42 0l.85.85a1 1 0 0 1-1.41 1.42l-.86-.86a1 1 0 0 1 0-1.41Zm-9.35 9.34a1 1 0 0 1 1.41 0l.86.86a1 1 0 1 1-1.42 1.41l-.85-.85a1 1 0 0 1 0-1.42Zm11.47 1.42a1 1 0 0 1-1.41 0l-.86-.86a1 1 0 0 1 1.42-1.41l.85.85a1 1 0 0 1 0 1.42ZM8.46 7.53A1 1 0 0 1 7.05 8.94L6.2 8.09A1 1 0 0 1 7.6 6.67l.86.86ZM12 7.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Z"/></svg>
+          <span data-theme-label>Dark</span>
+        </button>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -30,7 +52,7 @@
       <div class="container">
         <span class="eyebrow">About Me</span>
         <h1 class="section-title">My path into computer engineering began with curiosity and grew through persistence, learning, and practical problem-solving.</h1>
-        <p class="section-intro">I am from Bhalwal, District Sargodha, Pakistan, and I came to university from an FSc Pre-Engineering background. What first attracted me to computer engineering was a simple curiosity about how computers actually work. Over time, that curiosity turned into a deeper interest in programming, systems, hardware, and academic growth.</p>
+        <p class="section-intro">{{ profile.about_intro }}</p>
       </div>
     </section>
 
@@ -38,11 +60,11 @@
       <div class="container section-grid">
         <div class="section-card">
           <h2>Academic Identity</h2>
-          <p><strong>Name:</strong> Muhammad Tahir Yaqoob</p>
-          <p><strong>Program:</strong> BS Computer Engineering</p>
-          <p><strong>University:</strong> UET Lahore Faisalabad Campus</p>
-          <p><strong>Hometown:</strong> Bhalwal, District Sargodha, Pakistan</p>
-          <p><strong>Interests:</strong> Programming, systems, hardware exploration, software logic, and practical engineering learning.</p>
+          <p><strong>Name:</strong> {{ profile.name }}</p>
+          <p><strong>Program:</strong> {{ profile.program }}</p>
+          <p><strong>University:</strong> {{ profile.university }}</p>
+          <p><strong>Hometown:</strong> {{ profile.hometown }}</p>
+          <p><strong>Interests:</strong> {{ profile.interests }}</p>
           <div class="tag-row">
             <span class="tag">Programming</span>
             <span class="tag">Hardware</span>
@@ -52,8 +74,8 @@
         </div>
         <div class="section-card">
           <h2>What Drives Me</h2>
-          <p>I want to become an engineer who can understand systems deeply and build useful solutions with them. My journey has taught me that confidence is built through steady work, especially when a subject feels difficult at the beginning.</p>
-          <p>From being curious about computer components at home to learning programming in university, I have grown through persistence, practical study, and a genuine interest in both the hardware and software sides of computer engineering.</p>
+          <p>{{ profile.drive_text_one }}</p>
+          <p>{{ profile.drive_text_two }}</p>
         </div>
       </div>
     </section>
@@ -92,7 +114,9 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-wrap">About page for Muhammad Tahir Yaqoob's academic and personal growth journey</div>
+    <div class="footer-wrap">About page for {{ profile.name }}'s academic and personal growth journey</div>
   </footer>
+
+  <script src="{{ '/script.js' | relative_url }}" defer></script>
 </body>
 </html>

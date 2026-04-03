@@ -1,27 +1,49 @@
 ---
 ---
+{% assign profile = site.data.profile %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Muhammad Tahir Yaqoob</title>
-  <meta name="description" content="Contact page for Muhammad Tahir Yaqoob's portfolio website.">
+  <title>Contact | {{ profile.name }}</title>
+  <meta name="description" content="Contact page for {{ profile.name }}'s portfolio website.">
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("portfolio-theme");
+        if (savedTheme) {
+          document.documentElement.setAttribute("data-theme", savedTheme);
+        }
+      } catch (error) {}
+    })();
+  </script>
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="{{ '/index.html' | relative_url }}">
-        <span class="brand-title">Muhammad Tahir Yaqoob</span>
-        <span class="brand-sub">Computer Engineering Portfolio</span>
+        <span class="brand-title">{{ profile.name }}</span>
+        <span class="brand-sub">{{ profile.site_label }}</span>
       </a>
-      <nav class="nav-links">
-        <a href="{{ '/index.html' | relative_url }}">Home</a>
-        <a href="{{ '/about.html' | relative_url }}">About</a>
-        <a href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
-        <a class="active" href="{{ '/contact.html' | relative_url }}">Contact</a>
-      </nav>
+      <div class="nav-tools">
+        <nav class="nav-links" id="primary-nav">
+          <a href="{{ '/index.html' | relative_url }}">Home</a>
+          <a href="{{ '/about.html' | relative_url }}">About</a>
+          <a href="{{ '/blog.html' | relative_url }}">Journey Blog</a>
+          <a class="active" href="{{ '/contact.html' | relative_url }}">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1.2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 14.8a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.2a1 1 0 0 1 1-1Zm8-6.8a1 1 0 0 1 0 2h-1.2a1 1 0 1 1 0-2H20ZM6.4 12a1 1 0 0 1-1 1H4.2a1 1 0 1 1 0-2h1.2a1 1 0 0 1 1 1Zm9.14-5.74a1 1 0 0 1 1.42 0l.85.85a1 1 0 0 1-1.41 1.42l-.86-.86a1 1 0 0 1 0-1.41Zm-9.35 9.34a1 1 0 0 1 1.41 0l.86.86a1 1 0 1 1-1.42 1.41l-.85-.85a1 1 0 0 1 0-1.42Zm11.47 1.42a1 1 0 0 1-1.41 0l-.86-.86a1 1 0 0 1 1.42-1.41l.85.85a1 1 0 0 1 0 1.42ZM8.46 7.53A1 1 0 0 1 7.05 8.94L6.2 8.09A1 1 0 0 1 7.6 6.67l.86.86ZM12 7.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Z"/></svg>
+          <span data-theme-label>Dark</span>
+        </button>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -38,22 +60,22 @@
       <div class="container contact-grid">
         <div class="contact-card">
           <h3>University</h3>
-          <p>BS Computer Engineering</p>
-          <p>UET Lahore Faisalabad Campus</p>
+          <p>{{ profile.program }}</p>
+          <p>{{ profile.university }}</p>
         </div>
         <div class="contact-card">
           <h3>Hometown</h3>
-          <p>Bhalwal, District Sargodha, Pakistan</p>
+          <p>{{ profile.hometown }}</p>
           <p>This is the place where my journey began before university life started.</p>
         </div>
         <div class="contact-card">
           <h3>Email</h3>
-          <p><a class="post-link" href="mailto:tahiryaqoobe865@gmail.com">tahiryaqoobe865@gmail.com</a></p>
+          <p><a class="post-link" href="mailto:{{ profile.email }}">{{ profile.email }}</a></p>
           <p>Use this email address to contact me directly.</p>
         </div>
         <div class="contact-card">
           <h3>GitHub Website</h3>
-          <p><a class="post-link" href="https://tahir-yaqoob.github.io" target="_blank" rel="noreferrer">tahir-yaqoob.github.io</a></p>
+          <p><a class="post-link" href="{{ profile.site_url }}" target="_blank" rel="noreferrer">{{ profile.site_url | replace: 'https://', '' }}</a></p>
           <p>This public link is the main digital home for this portfolio.</p>
         </div>
       </div>
@@ -67,5 +89,7 @@
   <footer class="site-footer">
     <div class="footer-wrap">Contact page prepared in a clean academic style for portfolio review</div>
   </footer>
+
+  <script src="{{ '/script.js' | relative_url }}" defer></script>
 </body>
 </html>

@@ -2,55 +2,69 @@
   title: "Searching for the Right Path: Universities, ECAT, and Early Confidence"
   url: "/posts/article-01.html"
   summary: "The beginning of my journey, university research, ECAT preparation, and the early confidence that became an important lesson."
+  tags: ["Admissions", "ECAT", "Beginnings"]
 - number: "02"
   title: "Choosing Computer Engineering and the ECAT Reality Check"
   url: "/posts/article-02.html"
   summary: "How I chose Computer Engineering and what the second ECAT attempt taught me about preparation and decision-making."
+  tags: ["Computer Engineering", "ECAT", "Decisions"]
 - number: "03"
   title: "Arrival at Faisalabad: First Impressions and an Unexpected Beginning"
   url: "/posts/article-03.html"
   summary: "A difficult first campus impression, hostel uncertainty, and the moment university life truly began."
+  tags: ["Campus Life", "Hostel", "Beginnings"]
 - number: "04"
   title: "Programming Was a Foreign Language"
   url: "/posts/article-04.html"
   summary: "A story about entering programming without background knowledge and slowly becoming curious about it."
+  tags: ["Programming", "Learning", "Growth"]
 - number: "05"
   title: "Dr. Bilal's First Lecture: Skills Over Labels"
   url: "/posts/article-05.html"
   summary: "A memorable classroom moment that changed how I thought about degrees, accreditation, and practical ability."
+  tags: ["Programming", "Mindset", "Inspiration"]
 - number: "06"
   title: "The Wrong Lab That Taught Me Responsibility"
   url: "/posts/article-06.html"
   summary: "A small mistake in the early semester that became an important lesson in being careful and responsible."
+  tags: ["University Life", "Responsibility", "Learning"]
 - number: "07"
   title: "Learning Responsibility in University Life"
   url: "/posts/article-07.html"
   summary: "Hostel adjustment, friendship, family standards, and the motivation that came from wanting to prove myself."
+  tags: ["University Life", "Motivation", "Growth"]
 - number: "08"
   title: "The First Quiz That Changed My Confidence"
   url: "/posts/article-08.html"
   summary: "Preparing seriously for Programming Fundamentals and discovering that hard work could compete with background knowledge."
+  tags: ["Programming", "Quiz", "Confidence"]
 - number: "09"
   title: "Midterms Proved I Belonged Here"
   url: "/posts/article-09.html"
   summary: "A turning point in which my midterm result made me feel that I truly belonged in the program."
+  tags: ["Programming", "Midterms", "Confidence"]
 - number: "10"
   title: "Finishing the Semester at the Top"
   url: "/posts/article-10.html"
   summary: "Project pressure, final exams, and the journey to a 3.94 GPA and top semester position."
+  tags: ["Projects", "Finals", "Achievement"]
 - number: "11"
   title: "Beginning of the Second Semester"
   url: "/posts/article-11.html"
   summary: "New subjects, a scholarship interview, and the challenge of missing the first database classes."
+  tags: ["Second Semester", "Database", "Scholarship"]
 - number: "12"
   title: "Setting Up the Database Lab"
   url: "/posts/article-12.html"
   summary: "Installing MySQL tools, practicing SQL, and understanding the importance of databases in structured data management."
+  tags: ["Database", "SQL", "Practical Work"]
 - number: "13"
   title: "A Creative Business Idea from Our Teacher"
   url: "/posts/article-13.html"
   summary: "A classroom problem about printing manuals that became a lesson in entrepreneurship and innovation."
+  tags: ["Ideas", "Entrepreneurship", "Inspiration"]
 - number: "14"
   title: "Ramadan, Global Tensions, and the Shift to Online Classes"
   url: "/posts/article-14.html"
   summary: "An unusual period shaped by Ramadan, transport difficulties, online learning, and educational adaptation."
+  tags: ["Online Classes", "Ramadan", "Adaptation"]
