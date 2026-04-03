@@ -177,8 +177,9 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
 
 .hero-main h1 {
   margin: 1rem auto 0;
-  max-width: 12ch;
-  font-size: clamp(2.2rem, 4.8vw, 4.15rem);
+  max-width: none;
+  font-size: clamp(2.5rem, 5.4vw, 4.8rem);
+  letter-spacing: 0.02em;
 }
 
 .section-title {
@@ -519,7 +520,7 @@ h1, h2, h3 { margin: 0; line-height: 1.12; }
 
   .hero-main h1 {
     max-width: none;
-    font-size: clamp(2rem, 8vw, 2.9rem);
+    font-size: clamp(2.1rem, 8vw, 3.1rem);
   }
 
   .stats-bar { grid-template-columns: 1fr; }
