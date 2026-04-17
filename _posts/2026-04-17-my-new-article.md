@@ -1,0 +1,41 @@
+---
+title: "Online Learning Challenges and Digital Adjustments"
+date: 2024-01-02 08:00:00 +0500
+summary: "Adapting to online classes, technical difficulties, and learning new academic systems during an unusual academic period."
+tags:
+  - Online Classes
+  - Remote Learning
+  - Adaptation
+article_label: "Article 15"
+meta: "Challenges of online education"
+hero_image: "/assets/article-visuals/article-15.svg"
+hero_image_alt: "Illustration of a student attending online classes on a laptop with unstable internet signals."
+---
+
+## Adjusting to online learning
+
+Once the university shifted to online classes, the semester continued in a completely different way than we were used to. Fortunately, I had internet access at home, so attending lectures was possible most of the time. However, the connection was not always stable, and sometimes lectures would disconnect or freeze in the middle.
+
+This was not only my experience. Many students struggled with internet connectivity and adapting to the new learning environment. Studying remotely meant we could not sit together, discuss problems, or help each other understand complex topics as we usually did in physical classes.
+
+> Learning alone through a screen felt very different from learning together in a classroom.
+
+Because of these difficulties, understanding some lectures became challenging. Sometimes teachers explained concepts quickly, and if we missed a point due to internet lag, it was hard to catch up.
+
+## Long hours in front of the screen
+
+Online education also meant spending long hours looking at a screen. Watching lectures continuously throughout the day started to affect my eyesight, and my eyes often felt strained and tired. Thankfully, after some time and rest, my eyesight returned to normal.
+
+Another difficulty was the large number of assignments. Different teachers gave tasks regularly, and completing them while attending online lectures made the schedule quite demanding.
+
+## Learning new digital systems
+
+One of the biggest adjustments was learning how to use various online platforms for lectures and assignments. Some teachers used different systems, which sometimes created confusion.
+
+For example, one teacher conducted lectures through Google Calendar, and students had to join the meeting through links provided there. Many of us were unfamiliar with this process and often struggled just to start the lecture session.
+
+At one point, an instructor asked us to submit an assignment through email. Since many of us had never submitted assignments this way before, several students—including me—were unsure how to properly send the email with the required files. The assignment carried significant marks, nearly ten in total, so missing the deadline was stressful.
+
+Because of this confusion, we requested our class representative to speak with the teacher and explain the situation. Eventually, the submission method was changed to Google Classroom, which made the process much easier for everyone. After that, submitting assignments became much smoother.
+
+Despite all the challenges, we gradually adapted to the new system and continued our classes until the end of March.
