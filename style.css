@@ -605,6 +605,173 @@ html[data-theme="light"] .post-card-media {
   font-weight: 700;
 }
 
+.blog-archive {
+  padding-top: 0.4rem;
+}
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.folder-card {
+  position: relative;
+  width: 100%;
+  padding: 1.5rem 1.35rem 1.3rem;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+    var(--panel);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+html[data-theme="light"] .folder-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(11, 125, 176, 0.04)),
+    var(--panel-strong);
+}
+
+.folder-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(105, 210, 231, 0.32);
+}
+
+.folder-card.is-active {
+  border-color: rgba(105, 210, 231, 0.42);
+  background:
+    linear-gradient(180deg, rgba(105, 210, 231, 0.14), rgba(137, 240, 199, 0.06)),
+    var(--panel);
+}
+
+html[data-theme="light"] .folder-card.is-active {
+  border-color: rgba(11, 125, 176, 0.26);
+  background:
+    linear-gradient(180deg, rgba(11, 125, 176, 0.15), rgba(14, 170, 134, 0.05)),
+    var(--panel-strong);
+}
+
+.folder-card:focus-visible {
+  outline: 3px solid rgba(105, 210, 231, 0.4);
+  outline-offset: 3px;
+}
+
+html[data-theme="light"] .folder-card:focus-visible {
+  outline-color: rgba(11, 125, 176, 0.36);
+}
+
+.folder-glyph {
+  position: relative;
+  width: 72px;
+  height: 50px;
+  border-radius: 16px;
+  border: 1px solid rgba(105, 210, 231, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.folder-glyph::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 10px;
+  width: 34px;
+  height: 16px;
+  border-radius: 14px 14px 0 0;
+  border: 1px solid inherit;
+  border-bottom: 0;
+  background: inherit;
+}
+
+.folder-card[data-folder="admission-journey"] .folder-glyph {
+  background: linear-gradient(135deg, rgba(255, 209, 102, 0.42), rgba(105, 210, 231, 0.18));
+  border-color: rgba(255, 209, 102, 0.36);
+}
+
+.folder-card[data-folder="first-semester"] .folder-glyph {
+  background: linear-gradient(135deg, rgba(105, 210, 231, 0.42), rgba(137, 240, 199, 0.16));
+  border-color: rgba(105, 210, 231, 0.34);
+}
+
+.folder-card[data-folder="second-semester"] .folder-glyph {
+  background: linear-gradient(135deg, rgba(137, 240, 199, 0.34), rgba(255, 209, 102, 0.16));
+  border-color: rgba(137, 240, 199, 0.32);
+}
+
+.folder-label,
+.folder-selection-label {
+  color: var(--accent-3);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.folder-card h2,
+.folder-selection h2 {
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+}
+
+.folder-card p,
+.folder-selection p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.folder-card-footer {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted-2);
+  font-size: 0.82rem;
+}
+
+.folder-card-footer span:last-child {
+  text-align: right;
+}
+
+.folder-selection {
+  margin-bottom: 1rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+html[data-theme="light"] .folder-selection {
+  background: rgba(11, 125, 176, 0.06);
+}
+
+.folder-selection h2 {
+  margin: 0.45rem 0 0.35rem;
+}
+
+.folder-placeholder {
+  margin-bottom: 1rem;
+}
+
+.folder-reset {
+  flex-shrink: 0;
+}
+
 .filter-toolbar {
   margin-bottom: 1rem;
 }
@@ -813,6 +980,7 @@ html[data-theme="light"] .pull-quote {
   .post-grid,
   .contact-grid,
   .highlight-grid { grid-template-columns: 1fr; }
+  .folder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero-side { grid-template-columns: 1fr; width: 100%; }
   .visual-tile { grid-template-columns: 1fr; }
   .hero-visual { justify-self: start; max-width: 100%; }
@@ -864,7 +1032,8 @@ html[data-theme="light"] .pull-quote {
   .article-shell,
   .section-card,
   .contact-card,
-  .post-card { padding: 1.25rem; }
+  .post-card,
+  .folder-card { padding: 1.25rem; }
 
   .hero-main h1 {
     max-width: none;
@@ -877,4 +1046,16 @@ html[data-theme="light"] .pull-quote {
   }
 
   .stats-bar { grid-template-columns: 1fr; }
+
+  .folder-grid { grid-template-columns: 1fr; }
+
+  .folder-card-footer,
+  .folder-selection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .folder-reset {
+    width: 100%;
+  }
 }
