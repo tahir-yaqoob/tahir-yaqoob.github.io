@@ -74,7 +74,7 @@
           {% else %}
           <span></span>
           {% endif %}
-          <a class="button secondary" href="{{ '/blog.html' | relative_url }}">Back to Blog</a>
+          <a class="button secondary" href="{{ '/blog.html' | relative_url }}{% if page.blog_folder %}?folder={{ page.blog_folder }}{% endif %}">Back to Blog</a>
           {% if page.previous %}
           <a class="button primary" href="{{ page.previous.url | relative_url }}">Next Article</a>
           {% else %}
