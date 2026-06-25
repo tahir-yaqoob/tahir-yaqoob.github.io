@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Why I Built This Portfolio: My Digital Footprint as a Computer Engineering Student"
-date: 2024-01-17 08:00:00 +0500
+date: 2023-12-31 08:00:00 +0500
 summary: "A personal reflection on why I created this GitHub Pages portfolio, how it supports my Computer Engineering journey, and how it connects with my growing interest in AI, ML, and practical software development."
 tags:
   - Portfolio
@@ -11,7 +11,7 @@ tags:
   - Machine Learning
   - Student Journey
 blog_folder: portfolio-reason
-article_label: "Portfolio Reason"
+article_label: "Article 0"
 ---
 
 # Why Students Need More Than a Degree
