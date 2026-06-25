@@ -12,6 +12,8 @@ tags:
   - Student Journey
 blog_folder: portfolio-reason
 article_label: "Portfolio Reason"
+hero_image: "/assets/article-visuals/article-17-photo.jpg"
+hero_image_alt: "A winding mountain road through green hills with snow-covered peaks in the distance."
 ---
 ### Why Students Need More Than a Degree
 When I first entered university as a Computer Engineering student, I used to think that academic progress was mainly about attending classes, preparing for quizzes, submitting assignments, and passing exams. These things are important, and no serious student can ignore them. However, as my first semester at UET Lahore, Faisalabad Campus continued, I slowly realized that university life is not only about collecting marks. It is also about building an identity as a learner, showing growth through real work, and creating something that remains visible even after a semester is over. This portfolio is part of that realization. I built it because I wanted to leave my digital footprint as a student of Computer Engineering. A digital footprint means more than simply having an online profile. For me, it means keeping a record of my learning, my reflections, my projects, my mistakes, and my improvement. It is a place where I can connect classroom experiences with practical growth. It is also a way to show that I am not only studying technology, but also trying to understand how technology can be used with purpose.
