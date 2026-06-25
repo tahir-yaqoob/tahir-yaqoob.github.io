@@ -1,23 +1,23 @@
+- id: portfolio-reason
+  label: Folder 0
+  title: Portfolio Reason
+  description: Why I built this GitHub Pages portfolio and how it records my Computer Engineering, AI, and ML learning journey.
+  note: Digital footprint, GitHub Pages, and goals
+
 - id: admission-journey
-  label: Folder 01
+  label: Folder 1
   title: Admission Journey
   description: University research, ECAT preparation, and the decisions that led me into computer engineering.
   note: ECAT, choices, and first steps
 
 - id: first-semester
-  label: Folder 02
+  label: Folder 2
   title: 1st Semester
   description: My first lectures, quizzes, projects, and the confidence I built during the opening semester.
   note: Programming, midterms, and finals
 
 - id: second-semester
-  label: Folder 03
+  label: Folder 3
   title: 2nd Semester
   description: New subjects, lab work, creative ideas, and the adjustments that shaped the next chapter.
   note: Databases, adaptation, and online classes
-
-- id: portfolio-reason
-  label: Folder 04
-  title: Portfolio Reason
-  description: Why I built this GitHub Pages portfolio and how it records my Computer Engineering, AI, and ML learning journey.
-  note: Digital footprint, GitHub Pages, and goals
